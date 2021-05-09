@@ -21,7 +21,7 @@ public class aStar {
 			{
 				return n;
 			}
-			for(Node.Edge edge : n.neighbors)
+			for(Node.Edge edge : n.getNeighbors())
 			{
 				Node m = edge.node;
 				double totalWeight = n.g + edge.weight;
