@@ -56,12 +56,12 @@ public class Node implements Comparable<Node>{
 
 
 	public void addBranch(int weight, Node node)
-    {
+	{
     	Edge newEdge = new Edge(weight, node);
     	neighbors.add(newEdge);
     }
 	
 	public double calculateHeuristic(Node target){
-        return this.h;
+		return this.h;
 	}
 }
