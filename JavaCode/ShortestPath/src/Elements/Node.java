@@ -24,25 +24,25 @@ public class Node implements Comparable<Node>{
 		this.h = h;
 		this.id = idCounter++;
 		this.neighbors = new ArrayList<>();
-    }
+	}
     
-    @Override
-    public int compareTo(Node n) {
-    	return Double.compare(this.f, n.f);
-    }
-    
-    private List<Edge> neighbors;
+	@Override
+	public int compareTo(Node n) {
+		return Double.compare(this.f, n.f);
+	}
 	
-    public static class Edge {
-    	Edge(int weight, Node node) {
-    		this.weight = weight;
-    		this.node = node;
-    	}
-    	public int weight;
-    	public Node node;
-    }
+	private List<Edge> neighbors;
 	
-    public List<Edge> getNeighbors() {
+	public static class Edge {
+		Edge(int weight, Node node) {
+			this.weight = weight;
+			this.node = node;
+		}
+		public int weight;
+		public Node node;
+	}
+	
+	public List<Edge> getNeighbors() {
 		return neighbors;
 	}
 
