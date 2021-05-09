@@ -46,10 +46,6 @@ public class Node implements Comparable<Node>{
 		return neighbors;
 	}
 
-	public void setNeighbors(List<Edge> neighbors) {
-		this.neighbors = neighbors;
-	}
-
 	public int getX() {
 		return x;
 	}
@@ -58,29 +54,6 @@ public class Node implements Comparable<Node>{
 		return y;
 	}
 
-	public static int getIdCounter() {
-		return idCounter;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public Node getParent() {
-		return parent;
-	}
-
-	public double getF() {
-		return f;
-	}
-
-	public double getG() {
-		return g;
-	}
-
-	public double getH() {
-		return h;
-	}
 
 	public void addBranch(int weight, Node node)
     {
