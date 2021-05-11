@@ -1,11 +1,11 @@
-package OOPLab.Element;
+package elements;
 
 import java.util.ArrayList;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Vertext extends Circle implements Comparable<Vertext> {
+public class Vertice extends Circle implements Comparable<Vertice> {
 	private static int idCounter = 0;
 	private int id; 
 	
@@ -17,12 +17,12 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		// Heuristic
 		private double h;
 	
-	private ArrayList<Edge> neighbors = new ArrayList<>();
-	public Vertext(double x, double y, double radius) {
+	private ArrayList<Edge> neighbors = new ArrayList<Edge>();
+	public Vertice(double x, double y, double radius) {
 		super(x, y, radius, Color.RED);
 		id = idCounter++;
 	}
-	public Vertext(double x, double y) {
+	public Vertice(double x, double y) {
 		super(x, y, 10.0, Color.RED);
 		id = idCounter++;
 	}
@@ -38,12 +38,12 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		double b = Math.pow((this.getCenterY() - y), 2);
 		return (a + b <= Math.pow(this.getRadius(), 2));
 	}
-	public boolean equals(Vertext b) {
+	public boolean equals(Vertice b) {
 		// TODO Auto-generated method stub
 		return (b.getCenterX() == this.getCenterX() && b.getCenterY() == this.getCenterY());
 	}
 	@Override
-	public int compareTo(Vertext n) {
+	public int compareTo(Vertice n) {
 		// TODO Auto-generated method stub
 		return Double.compare(this.f, n.getF());
 	}
@@ -74,6 +74,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public void setH(double h) {
 		this.h = h;
 	}
-	
+	public ArrayList<Edge> getNeighbors() {
+		return this.neighbors;
+	}
 
 }
