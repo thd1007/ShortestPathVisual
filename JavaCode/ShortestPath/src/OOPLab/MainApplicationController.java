@@ -339,7 +339,7 @@ public class MainApplicationController implements Initializable {
 						MainPane.getChildren().removeAll(edge, edge.getText());
 						tempVertextA.removeNeighbor(tempVertextB);
 						tempVertextB.removeNeighbor(tempVertextA);
-//						Configuration.GraphEdge.add(newEdge);
+						Configuration.GraphEdge.remove(edge);
 						myLabel.setText("Remove Edge succesfully");
 						tempVertextA.setFill(Color.RED);
 						tempVertextB.setFill(Color.RED);
