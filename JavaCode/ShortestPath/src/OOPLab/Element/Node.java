@@ -56,6 +56,10 @@ public class Node implements Comparable<Node> {
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
 	public void addBranch(int weight, Node node)
 	{
     	Edge newEdge = new Edge(weight, node);
