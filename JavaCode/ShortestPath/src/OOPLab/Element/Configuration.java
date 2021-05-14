@@ -3,11 +3,21 @@ package OOPLab.Element;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 public class Configuration {
 	// allow using mouse to move vertext
 	public static boolean allowMoveVertext = true;
+	// start color is blue
+	public static Paint startColor = Color.BLUE;
+	// end color is yellow
+	
+	// startVertext 
+	public static Vertext startVertext = null;
+	public static Vertext endVertext = null;
+	public static Paint endColor = Color.YELLOW;
 	public static int maxWeight = 300;
 	public static int minWeight = 1;
 	
