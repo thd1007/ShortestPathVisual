@@ -78,7 +78,7 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="25.0" layoutY="106.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="166.0" text="Bellman Ford">
+            <Button fx:id="BFAButton" layoutX="25.0" layoutY="106.0" mnemonicParsing="false" onAction="#BellmanFordAlgorithmFunction" prefHeight="45.0" prefWidth="166.0" text="Bellman Ford">
                <font>
                   <Font size="21.0" />
                </font>

@@ -1,0 +1,6 @@
+- khi sử dụng tất cả các nút ô trong ô trái trên đều có thể move vertext trừ addedge button
+- khi sử dụng reset, hệ thống tự động trở về nút add vertext
+- khi trong chế độ tạo edge, khi chọn start vertext có thể bấm lại vào node vừa chọn để hủy thao tác vừa thực hiện
+- khi trong chế độ tạo start end, từ trạng thái start có thể tạo end hoặc hủy back lại thao tác chọn start. khi từ trạng thái end
+có thể back lại chính thao tác tạo end click lại end V vừa tao 
+- khi thay đổi weight, sau khi nhập cần enter để kêt thúc thao tác

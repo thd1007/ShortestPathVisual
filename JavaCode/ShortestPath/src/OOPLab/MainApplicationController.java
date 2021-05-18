@@ -1,5 +1,6 @@
 package OOPLab;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,7 +10,11 @@ import OOPLab.Element.Vertext;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -18,8 +23,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class MainApplicationController implements Initializable {
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 	@FXML
 	private Button AddVertextrb, AddEdgerb, MoveVertextrb, RemoveVertextrb, RemoveEdgerb, ChooseStartEndVertextrb;
 	@FXML 
@@ -30,6 +39,8 @@ public class MainApplicationController implements Initializable {
 	Label myLabel;
 	@FXML
 	Button ResetButton;
+	@FXML
+	Button BFAButton;
 	private boolean FlagaddEdge = false, FlagremoveEdge = false, FlagStartEndVertext = false;
 	private Vertext tempVertextA = null, tempVertextB = null;
 	
@@ -45,14 +56,14 @@ public class MainApplicationController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		AddVertextrb.setTextFill(Color.RED);
+		AddVertextrb.setTextFill(Configuration.VertextColor);
 		isAddV = true;
 		AddVertextrb.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				// TODO Auto-generated method stub
-				AddVertextrb.setTextFill(Color.RED);
+				AddVertextrb.setTextFill(Configuration.VertextColor);
 				AddEdgerb.setTextFill(Color.BLACK);
 				MoveVertextrb.setTextFill(Color.BLACK);
 				RemoveEdgerb.setTextFill(Color.BLACK);
@@ -68,7 +79,7 @@ public class MainApplicationController implements Initializable {
 			@Override
 			public void handle(MouseEvent e) {
 				// TODO Auto-generated method stub
-				AddEdgerb.setTextFill(Color.RED);
+				AddEdgerb.setTextFill(Configuration.VertextColor);
 				AddVertextrb.setTextFill(Color.BLACK);
 				MoveVertextrb.setTextFill(Color.BLACK);
 				RemoveEdgerb.setTextFill(Color.BLACK);
@@ -86,7 +97,7 @@ public class MainApplicationController implements Initializable {
 				// TODO Auto-generated method stub
 				AddEdgerb.setTextFill(Color.BLACK);
 				AddVertextrb.setTextFill(Color.BLACK);
-				MoveVertextrb.setTextFill(Color.RED);
+				MoveVertextrb.setTextFill(Configuration.VertextColor);
 				RemoveEdgerb.setTextFill(Color.BLACK);
 				RemoveVertextrb.setTextFill(Color.BLACK);
 				ChooseStartEndVertextrb.setTextFill(Color.BLACK);
@@ -103,7 +114,7 @@ public class MainApplicationController implements Initializable {
 				AddEdgerb.setTextFill(Color.BLACK);
 				AddVertextrb.setTextFill(Color.BLACK);
 				MoveVertextrb.setTextFill(Color.BLACK);
-				RemoveEdgerb.setTextFill(Color.RED);
+				RemoveEdgerb.setTextFill(Configuration.VertextColor);
 				RemoveVertextrb.setTextFill(Color.BLACK);
 				ChooseStartEndVertextrb.setTextFill(Color.BLACK);
 				isRemoveE = true;
@@ -120,7 +131,7 @@ public class MainApplicationController implements Initializable {
 				AddVertextrb.setTextFill(Color.BLACK);
 				MoveVertextrb.setTextFill(Color.BLACK);
 				RemoveEdgerb.setTextFill(Color.BLACK);
-				RemoveVertextrb.setTextFill(Color.RED);
+				RemoveVertextrb.setTextFill(Configuration.VertextColor);
 				ChooseStartEndVertextrb.setTextFill(Color.BLACK);
 				isRemoveV = true;
 				isAddV = isMoveV = isAddE = isRemoveE = isChooseStartEndV = false;
@@ -137,7 +148,7 @@ public class MainApplicationController implements Initializable {
 				MoveVertextrb.setTextFill(Color.BLACK);
 				RemoveEdgerb.setTextFill(Color.BLACK);
 				RemoveVertextrb.setTextFill(Color.BLACK);
-				ChooseStartEndVertextrb.setTextFill(Color.RED);
+				ChooseStartEndVertextrb.setTextFill(Configuration.VertextColor);
 				isChooseStartEndV = true;
 				isAddV = isMoveV = isAddE = isRemoveE = isRemoveV = false;
 			}
@@ -164,14 +175,21 @@ public class MainApplicationController implements Initializable {
 			ChooseStartEndVertext();
 		}
 	}
-	
+	// BellmanFord Algorithm
+	public void BellmanFordAlgorithmFunction(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("BellmanFordAlg/BellmanFordAlgorithm.fxml"));
+		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 	// reset function
 	public void ResetFunction(ActionEvent e) {
 		MainPane.getChildren().clear();
 		Configuration.GraphNode.clear();
 		myLabel.setText("");
 		AddVertextFunction();
-		AddVertextrb.setTextFill(Color.RED);
+		AddVertextrb.setTextFill(Configuration.VertextColor);
 		AddEdgerb.setTextFill(Color.BLACK);
 		MoveVertextrb.setTextFill(Color.BLACK);
 		RemoveEdgerb.setTextFill(Color.BLACK);
@@ -287,11 +305,23 @@ public class MainApplicationController implements Initializable {
 					}
 					else {
 						vertext.setFill(Configuration.endColor);
+						// if click to start vertext again, refill both start and end vertext
 						if(vertext.equals(Configuration.startVertext)) {
 							FlagStartEndVertext = false;
-							Configuration.startVertext.setFill(Color.RED);
+							Configuration.startVertext.setFill(Configuration.VertextColor);
+							if(Configuration.endVertext != null) {
+								Configuration.endVertext.setFill(Configuration.VertextColor);
+								Configuration.endVertext = null;
+							}
 							myLabel.setText("Please choose Start Vertext");
 							Configuration.startVertext = null;
+							return;
+						}
+						// if click to end vertext again, refill only end vertext
+						else if(Configuration.endVertext != null && vertext.equals(Configuration.endVertext)) {
+							FlagStartEndVertext = true;
+							Configuration.endVertext.setFill(Configuration.VertextColor);
+							Configuration.endVertext = null;
 							return;
 						}
 						Configuration.endVertext = vertext;
@@ -327,13 +357,13 @@ public class MainApplicationController implements Initializable {
 						vertext.setFill(Color.GREEN);
 						if(vertext.equals(tempVertextA)){
 							FlagaddEdge = false;
-							tempVertextA.setFill(Color.RED);
+							tempVertextA.setFill(Configuration.VertextColor);
 							myLabel.setText("Please choose an Vertext");
 							return;
 						}
 						if(tempVertextA.isNeighborVertex(vertext)) {
 							System.out.println("neighbor exists");
-							vertext.setFill(Color.RED);
+							vertext.setFill(Configuration.VertextColor);
 							return;
 						}
 						tempVertextB = vertext;
@@ -352,8 +382,8 @@ public class MainApplicationController implements Initializable {
 						tempVertextB.addNeighbor(newEdge);
 						Configuration.GraphEdge.add(newEdge);
 						myLabel.setText("Add Edge succesfully");
-						tempVertextA.setFill(Color.RED);
-						tempVertextB.setFill(Color.RED);
+						tempVertextA.setFill(Configuration.VertextColor);
+						tempVertextB.setFill(Configuration.VertextColor);
 						FlagaddEdge = false;
 					}
 					break;
@@ -411,13 +441,13 @@ public class MainApplicationController implements Initializable {
 					else {
 						if(vertext.equals(tempVertextA)){
 							FlagremoveEdge = false;
-							tempVertextA.setFill(Color.RED);
+							tempVertextA.setFill(Configuration.VertextColor);
 							myLabel.setText("Please choose an Vertext");
 							return;
 						}
 						if(!tempVertextA.isNeighborVertex(vertext)) {
 							System.out.println("No neighbor exists");
-							vertext.setFill(Color.RED);
+							vertext.setFill(Configuration.VertextColor);
 							return;
 						}
 						tempVertextB = vertext;
@@ -427,8 +457,8 @@ public class MainApplicationController implements Initializable {
 						tempVertextB.removeNeighbor(tempVertextA);
 						Configuration.GraphEdge.remove(edge);
 						myLabel.setText("Remove Edge succesfully");
-						tempVertextA.setFill(Color.RED);
-						tempVertextB.setFill(Color.RED);
+						tempVertextA.setFill(Configuration.VertextColor);
+						tempVertextB.setFill(Configuration.VertextColor);
 						FlagremoveEdge = false;
 					}
 					break;

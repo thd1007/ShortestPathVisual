@@ -1,5 +1,6 @@
 package OOPLab.Element;
 
+import java.util.List;
 import java.util.Random;
 
 import OOPLab.MainApplicationController;
@@ -9,13 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Edge extends Line {
@@ -23,6 +27,7 @@ public class Edge extends Line {
 	private int weight;
 	private Vertext start, end;
 	private TextField text;
+	private Label textLabel;
 	private double textwidth = Configuration.textWeightwidth, textheight = Configuration.textWeighheight;
 	public double PosTextx() {
 		return Math.max(0.0, (this.start.getCenterX() + this.end.getCenterX())/2 - textwidth/2);
@@ -41,6 +46,7 @@ public class Edge extends Line {
 		this.setEnd(end);
 		// assign color
 		this.setStroke(Color.BLUE);
+		this.setStrokeWidth(Configuration.Linewidth);
 		// assign weight of edge with random number from min to max
 		this.weight = new Random().nextInt(Configuration.maxWeight - Configuration.minWeight) + Configuration.minWeight;
 		
@@ -93,7 +99,23 @@ public class Edge extends Line {
 		
 //		text.setTextFormatter(new TextFormatter<>(TextFormatter.IDENTITY_STRING_CONVERTER));
 	}
-	
+	public Edge(List<Vertext> list, int S, int E, int ID, int weight, Paint paint) {
+		super(list.get(S).getCenterX(), list.get(S).getCenterY(),
+				list.get(E).getCenterX(), list.get(E).getCenterY());
+		this.start = list.get(S);
+		this.end = list.get(E);
+		this.setStroke(paint);
+		this.setStrokeWidth(Configuration.Linewidth);
+		this.ID = ID;
+		this.weight = weight;
+		this.textLabel = new Label(String.valueOf(weight));
+		this.textLabel.setLayoutX(PosTextx());
+		this.textLabel.setLayoutY(PosTexty());
+		this.textLabel.setFont(Font.font(20));
+	}
+	public Edge CopyEdge(List<Vertext> list, int S, int E) {
+		return new Edge(list, S, E, this.ID, this.weight, this.getStroke());
+	}
 	
 	public int getWeight() {
 		return weight;
@@ -121,5 +143,11 @@ public class Edge extends Line {
 	}
 	public TextField getText() {
 		return text;
+	}
+	public boolean equals(Edge e) {
+		return (this.ID == e.getID());
+	}
+	public Label getLabel() {
+		return textLabel;
 	}
 }

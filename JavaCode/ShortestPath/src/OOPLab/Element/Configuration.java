@@ -8,16 +8,25 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 public class Configuration {
+	
+	// Edge line with
+	public static double Linewidth = 3;
+	// color vertext
+	public static Paint VertextColor = Color.RED;
+	// chose color vertext
+	public static Paint ChoseVertextColor = Color.GREEN;
 	// allow using mouse to move vertext
 	public static boolean allowMoveVertext = true;
 	// start color is blue
 	public static Paint startColor = Color.BLUE;
-	// end color is yellow
 	
-	// startVertext 
+	// start end Vertext 
 	public static Vertext startVertext = null;
 	public static Vertext endVertext = null;
+	// end color is yellow
 	public static Paint endColor = Color.YELLOW;
+	public static String textColor = "-fx-text-inner-color: red";
+	
 	public static int maxWeight = 300;
 	public static int minWeight = 1;
 	
