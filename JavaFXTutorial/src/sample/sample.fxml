@@ -1,0 +1,16 @@
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane fx:controller="sample.Controller"
+			xmlns:fx="http://javafx.com/fxml"
+			stylesheets="@MyStyles.css">
+	<center>
+		<AnchorPane fx:id="graph" style="-fx-background-color:lightblue;"
+					onMousePressed="#onGraphPressed"
+					onDragDetected="#onGraphDragDetected"
+					onMouseDragged="#onGraphDragged"
+					onMouseReleased="#onGraphReleased"/>
+	</center>
+</BorderPane>
+
