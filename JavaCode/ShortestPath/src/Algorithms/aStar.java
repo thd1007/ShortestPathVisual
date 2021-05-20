@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import Elements.Node;
+import OOPLab.Element.Node;
 public class aStar {
 
 	public static Node findPath(Node start, Node target) {
@@ -67,10 +67,10 @@ public class aStar {
 		
 		while(n.parent != null)
 		{
-			ids.add(n.id);
+			ids.add(n.getId());
 			n = n.parent;
 		}
-		ids.add(n.id);
+		ids.add(n.getId());
 		Collections.reverse(ids);
 		
 		for(int id : ids)

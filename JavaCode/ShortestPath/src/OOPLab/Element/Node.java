@@ -1,15 +1,16 @@
-package Elements;
+package OOPLab.Element;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node implements Comparable<Node>{
+
+public class Node implements Comparable<Node> {
 	// Coordinate
 	private int x;
 	private int y;
 	// Id for readability of result purposes
 	private static int idCounter = 0;
-	public int id;
+	private int id;
 	
 	// Parent
 	public Node parent = null;
@@ -55,11 +56,15 @@ public class Node implements Comparable<Node>{
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
 	public void addBranch(int weight, Node node)
 	{
-		Edge newEdge = new Edge(weight, node);
-		neighbors.add(newEdge);
-	}
+    	Edge newEdge = new Edge(weight, node);
+    	neighbors.add(newEdge);
+    }
 	
 	public double calculateHeuristic(Node target){
 		return this.h;
