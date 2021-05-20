@@ -1,39 +1,67 @@
 package algorithm;
+import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import Element.Block;
 import Element.Configuration;
 import Element.Edge;
 import Element.Vertext;
+import javafx.animation.FillTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.StrokeTransition;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class Dijkstra {
-	public static PriorityQueue<Vertext> pq = new PriorityQueue<Vertext>();
+	private static PriorityQueue<Vertext> pq = new PriorityQueue<Vertext>();
+	public static ArrayList<Block> eachStep = new ArrayList<Block>();
 	
-	public static void init(Vertext start) {
+	private static void initState() {
 		pq.clear();
+		eachStep.clear();
 		for(Vertext v: Configuration.GraphNode) {
-			if(start.getCenterX() == v.getCenterX() && start.getCenterY() == v.getCenterY()) {
-				v.setF(0);
+			
+			if(Configuration.startVertext.getCenterX() == v.getCenterX() && Configuration.startVertext.getCenterY() == v.getCenterY()) {
+				v.setG(0);
 			}
 			else {
-				v.setF(Double.MAX_VALUE);
+				v.setG(Double.MAX_VALUE);
 			}
 		}
-	}
-	public static void shortestPath(Vertext start, Vertext end) {
-		pq.add(start);
-		while(!pq.isEmpty()) {
-			Vertext u = pq.peek();
-			pq.poll();
-			
-			for(Edge edge: u.getNeighbors()) {
-				Vertext v = edge.getStart() == u ? edge.getEnd() : edge.getStart();
-				if(edge.getWeight() + u.getF() < v.getF()) {
-					v.setF(edge.getWeight() + u.getF());
-					pq.add(v);
-				}
-			}
-		}
-		System.out.println(end.getF());
+		
+		pq.add(Configuration.startVertext);
+		Block init = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		eachStep.add(init);
 	}
 	
+	private static void step(Vertext curVertex) {
+		Color cur = (Color) curVertex.getFill();
+		curVertex.setFill(Color.BLACK);
+		for(Edge edge: curVertex.getNeighbors()) {
+			edge.setStroke(Color.GREEN);
+			Vertext v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
+			if(curVertex.getG() + edge.getWeight() < v.getG()) {
+				v.setG(curVertex.getG() + edge.getWeight());
+				pq.add(v);
+			}
+		}
+		Block step = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		eachStep.add(step);
+		curVertex.setFill(cur);
+	}
+	
+	public static void run() {
+		if(Configuration.startVertext == null || Configuration.endVertext == null) 
+			return;
+		
+		initState();
+		
+		while(!pq.isEmpty()) {
+			Vertext u = pq.poll();
+			
+			step(u);
+		}
+		System.out.println(Configuration.endVertext.getG());
+	}
 }
