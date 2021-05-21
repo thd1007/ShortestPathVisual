@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="892.0" style="-fx-background-color: #02075d;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainApplicationController">
+   <children>
+      <AnchorPane fx:id="MainPane" layoutX="269.0" layoutY="62.0" prefHeight="709.0" prefWidth="558.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="62.0" />
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="518.0" prefWidth="215.0" style="-fx-background-color: #92a1cf;">
+         <children>
+            <Button fx:id="AddVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Add Vertext">
+               <VBox.margin>
+                  <Insets left="40.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="AddEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Add Edge">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="MoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Move Vertext">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="RemoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" style="-fx-background-color: #ffffff;" text="Remove Vertext">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="RemoveEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Remove Edge">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="ResetButton" mnemonicParsing="false" onAction="#ResetFunction" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Reset">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="ChooseStartEndVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #ffffff;" text="Choose S/E">
+               <VBox.margin>
+                  <Insets left="40.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="14.0" layoutY="546.0" prefHeight="262.0" prefWidth="215.0" style="-fx-background-color: #92a1cf;">
+         <children>
+            <Button layoutX="25.0" layoutY="22.0" mnemonicParsing="false" onAction="#DijkstraAlgorithm" prefHeight="45.0" prefWidth="166.0" text="Dijkstra">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button fx:id="BFAButton" layoutX="25.0" layoutY="106.0" mnemonicParsing="false" onAction="#BellmanFordAlgorithmFunction" prefHeight="45.0" prefWidth="166.0" text="Bellman Ford">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button layoutX="25.0" layoutY="197.0" mnemonicParsing="false" onAction ="#AStarAlgorithm" prefHeight="45.0" prefWidth="166.0" text="A*">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label fx:id="myLabel" layoutX="391.0" layoutY="20.0" text="Add vertext by clicking into white scene" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
