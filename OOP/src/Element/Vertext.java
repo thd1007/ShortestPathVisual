@@ -18,6 +18,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	private double radius = Configuration.radius;
 	private Text text;
 	private Label textg;
+	private Label textf;
 	
 	// A* variable by Dang
 	private double f = Double.MAX_VALUE;
@@ -32,6 +33,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		text= new Text(String.valueOf(id));
 		textg = new Label("INF");
 		textg.setTextFill(Color.RED);
+		textf = new Label("0.0");
+		textf.setTextFill(Color.BLUE);
 		text.setLayoutX(this.getCenterX() + radius);
 		text.setLayoutY(this.getCenterY());
 		// mouse dragged event for Vertext
@@ -65,7 +68,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		});
 
 	}
-	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, Paint color) {
+	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, Paint color) {
 		super(x, y, Configuration.radius, color);
 		this.id = id;
 		this.h = h;
@@ -73,16 +76,20 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.f = f;
 		this.text = new Text(text);
 		this.textg = new Label(textg);
+		this.textf = new Label(textf);
 		this.textg.setTextFill(Color.RED);
+		this.textf.setTextFill(Color.BLUE);
 		this.textg.setStyle(Configuration.textColor);
 		this.text.setLayoutX(this.getCenterX() + radius);
 		this.text.setLayoutY(this.getCenterY());
 		this.textg.setLayoutX(this.getCenterX());
 		this.textg.setLayoutY(this.getCenterY() + radius);
+		this.textf.setLayoutX(this.getCenterX());
+		this.textf.setLayoutY(this.getCenterY() - 4*radius);
 	}
 	// copy vertext
 	public Vertext CopyVertext() {
-		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), this.getFill());
+		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textf.getText(), this.getFill());
 	}
 	public void setId(int id) {
 		text.setText(String.valueOf(id));
@@ -164,6 +171,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		return f;
 	}
 	public void setF(double f) {
+		if(g == 0) textg.setText("0");
+		else textf.setText(String.valueOf(f));
 		this.f = f;
 	}
 	public double getG() {
@@ -186,5 +195,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public Label getTextg() {
 		return textg;
 	}
-
+	public Label getTextf() {
+		return textf;
+	}
 }

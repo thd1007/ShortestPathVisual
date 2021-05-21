@@ -82,7 +82,7 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="25.0" layoutY="197.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="166.0" text="A*">
+            <Button layoutX="25.0" layoutY="197.0" mnemonicParsing="false" onAction="#aStarAlgorithm" prefHeight="45.0" prefWidth="166.0" text="A*">
                <font>
                   <Font size="21.0" />
                </font>

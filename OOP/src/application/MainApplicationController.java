@@ -198,6 +198,15 @@ public class MainApplicationController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	public void aStarAlgorithm(ActionEvent event) throws IOException{
+		System.setProperty("user.dir", "aStar");
+		r = FXMLLoader.load(getClass().getResource("AStarAlgorithm.fxml"));
+		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(r);
+		stage.setScene(scene);
+		stage.show();
+	}	
 	// reset function
 	public void ResetFunction(ActionEvent e) {
 		MainPane.getChildren().clear();
