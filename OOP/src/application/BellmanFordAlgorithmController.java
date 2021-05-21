@@ -1,4 +1,5 @@
 package application;
+
 import  Element.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -83,7 +84,6 @@ public class BellmanFordAlgorithmController implements Initializable {
 		ConfigurationBFA.listBFA.add(curBlock);
 	}
 	private void show() {
-		ConfigurationBFA.listBFA.clear();
 		// initialize start vertext g
 		Configuration.startVertext.setG(0);
 		// create block
@@ -99,7 +99,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 				e.setStroke(Color.GREEN);;
 				ConfigurationBFA.listBFA.add(cur.CopyBlock());
-				e.setFill(Color.BLUE);
+				e.setStroke(Color.BLUE);
 			}
 		}
 		System.out.println(cur.endVertext().getG());
@@ -208,18 +208,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 		});
 	}
 	public void BackMain(ActionEvent e) throws IOException {
-		// Draw again in Main
-		for(Edge edge: Configuration.GraphEdge) {
-			edge.setStroke(Color.BLUE);
-		}
-		for(Vertext v: Configuration.GraphNode) {
-			v.setFill(Color.RED);
-			v.setG(Double.MAX_VALUE);
-		}
-				
-		Configuration.startVertext = null;
-		Configuration.endVertext = null;
-		String dir = "MainApplication.fxml";
+		String dir = "C:\\Users\\Nguyen Hoang Vu\\eclipse-workspace\\Shortest-Path-GUI\\OOPLab\\MainApplicationController.java";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -233,7 +222,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
 		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext, vertext.getText(), vertext.getTextg());
+			MainPane.getChildren().addAll(vertext.getStack(), vertext.getTextg());
 		}
 	}
 	

@@ -173,7 +173,7 @@ public class AStarAlgorithmController implements Initializable {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
 		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext, vertext.getText(), vertext.getTextg(), vertext.getTextf());
+			MainPane.getChildren().addAll(vertext.getStack(), vertext.getVBox());
 		}
 	}
 }

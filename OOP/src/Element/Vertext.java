@@ -2,12 +2,15 @@ package Element;
 
 import java.util.ArrayList;
 
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -18,55 +21,71 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	private double radius = Configuration.radius;
 	private Text text;
 	private Label textg;
-	private Label textf;
+	private Label textfa;
+	private Label textga;
 	
 	// A* variable by Dang
 	private double f = Double.MAX_VALUE;
 	private double g = Double.MAX_VALUE;
 		// Heuristic
 	private double h;
+	private StackPane stack =  new StackPane();
+	private VBox vbox = new VBox(5);
 	
 	private ArrayList<Edge> neighbors = new ArrayList<>();
 	public Vertext(double x, double y) {
 		super(x, y, Configuration.radius, Configuration.VertextColor);
 		id = Configuration.GraphNode.size();
 		text= new Text(String.valueOf(id));
-		textg = new Label("INF");
+		textg = new Label("Dist: INF");
 		textg.setTextFill(Color.RED);
-		textf = new Label("0.0");
-		textf.setTextFill(Color.BLUE);
-		text.setLayoutX(this.getCenterX() + radius);
-		text.setLayoutY(this.getCenterY());
-		// mouse dragged event for Vertext
-		this.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		
+		textga = new Label("Dist: INF");
+		textfa = new Label("Cost: 0.0");
+		textfa.setTextFill(Color.RED);
+		textga.setTextFill(Color.RED);
+		
+		vbox.getChildren().addAll(textga, textfa);
+		vbox.setLayoutX(this.getCenterX() + 3);
+		vbox.setLayoutY(this.getCenterY() + 15);
+		
+		stack.getChildren().addAll(this, text);
+		stack.translateXProperty().bind(stack.widthProperty().divide(-2));
+		stack.translateYProperty().bind(stack.heightProperty().divide(-2));
+		stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+		stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
+		stack.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(Configuration.allowMoveVertext) {
+				if(e.isSecondaryButtonDown() && Configuration.allowMoveVertext) {
 					double x = e.getX(), y = e.getY();
 					System.out.println("mouse dragged");
 					setFill(Color.GREEN);
-					setCenterX(x);
-					setCenterY(y);
-					text.setLayoutX(getCenterX() + radius);
-					text.setLayoutY(getCenterY());
+					setCenterX(stack.getLayoutX() + x + stack.getTranslateX());
+					setCenterY(stack.getLayoutY() + y + stack.getTranslateY());
+					stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+					stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
 				}
-				
 			}
 		});
-		this.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		stack.setOnMouseReleased(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
-				// TODO Auto-generated method stub
 				if(Configuration.allowMoveVertext) {
 					System.out.println("Mouse release");
 					setFill(Configuration.VertextColor);
+					System.out.println(e.getX() + " " + getCenterX());
+					System.out.println(getLayoutX());
 				}
 			}
 		});
 
+	}
+	public StackPane getStack() {
+		return stack;
 	}
 	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, Paint color) {
 		super(x, y, Configuration.radius, color);
@@ -76,20 +95,29 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.f = f;
 		this.text = new Text(text);
 		this.textg = new Label(textg);
-		this.textf = new Label(textf);
-		this.textg.setTextFill(Color.RED);
-		this.textf.setTextFill(Color.BLUE);
+		this.textga = new Label(textg);
+		this.textfa = new Label(textf);
+		
+		textfa.setTextFill(Color.RED);
+		textga.setTextFill(Color.RED);
+		this.textg.setTextFill(Configuration.VertextColor);
 		this.textg.setStyle(Configuration.textColor);
-		this.text.setLayoutX(this.getCenterX() + radius);
-		this.text.setLayoutY(this.getCenterY());
 		this.textg.setLayoutX(this.getCenterX());
 		this.textg.setLayoutY(this.getCenterY() + radius);
-		this.textf.setLayoutX(this.getCenterX());
-		this.textf.setLayoutY(this.getCenterY() - 4*radius);
+		
+		this.vbox.getChildren().addAll(textfa, textga);
+		vbox.setLayoutX(this.getCenterX() + 3);
+		vbox.setLayoutY(this.getCenterY() + 15);
+		
+		this.stack.getChildren().addAll(this, this.text);
+		stack.translateXProperty().bind(stack.widthProperty().divide(-2));
+		stack.translateYProperty().bind(stack.heightProperty().divide(-2));
+		stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+		stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
 	}
 	// copy vertext
 	public Vertext CopyVertext() {
-		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textf.getText(), this.getFill());
+		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textfa.getText(), this.getFill());
 	}
 	public void setId(int id) {
 		text.setText(String.valueOf(id));
@@ -171,17 +199,24 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		return f;
 	}
 	public void setF(double f) {
-		if(g == 0) textg.setText("0");
-		else textf.setText(String.valueOf(f));
+		if(f == 0) textfa.setText("Cost: 0.0");
+		else textfa.setText("Cost: " + String.valueOf(f));
 		this.f = f;
 	}
 	public double getG() {
 		return g;
 	}
 	public void setG(double g) {
-		if(g == Double.MAX_VALUE) textg.setText("INF");
-		else textg.setText(String.valueOf(g));
+		if(g == Double.MAX_VALUE) {
+			textg.setText("Dist: INF");
+			textga.setText("Dist: INF");
+		}
+		else {
+			textg.setText("Dist: "+ String.valueOf(g));
+			textga.setText("Dist: " + String.valueOf(g));
+		}
 		this.g = g;
+		
 	}
 	public double getH() {
 		return h;
@@ -195,7 +230,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public Label getTextg() {
 		return textg;
 	}
-	public Label getTextf() {
-		return textf;
+	public VBox getVBox() {
+		return vbox;
 	}
 }

@@ -17,17 +17,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainApplicationController implements Initializable {
 	private Stage stage;
 	private Scene scene;
-	private Parent r;
+	private Parent root;
 	@FXML
 	private Button AddVertextrb, AddEdgerb, MoveVertextrb, RemoveVertextrb, RemoveEdgerb, ChooseStartEndVertextrb;
 	@FXML 
@@ -40,9 +42,6 @@ public class MainApplicationController implements Initializable {
 	Button ResetButton;
 	@FXML
 	Button BFAButton;
-	//@FXML
-	//Button DAButton;
-	
 	private boolean FlagaddEdge = false, FlagremoveEdge = false, FlagStartEndVertext = false;
 	private Vertext tempVertextA = null, tempVertextB = null;
 	
@@ -56,9 +55,9 @@ public class MainApplicationController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		show();
 		// TODO Auto-generated method stub
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
+		show();
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
 		AddVertextrb.setTextFill(Configuration.VertextColor);
 		isAddV = true;
 		AddVertextrb.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -180,30 +179,28 @@ public class MainApplicationController implements Initializable {
 	}
 	// BellmanFord Algorithm
 	public void BellmanFordAlgorithmFunction(ActionEvent e) throws IOException {
-		System.setProperty("user.dir", "BellmanFordAlgo");
-		r = FXMLLoader.load(getClass().getResource("BellmanFordAlgorithm.fxml"));
-		
+		System.setProperty("user.dir", "BellmanFordAlgorithm");
+		root = FXMLLoader.load(getClass().getResource("BellmanFordAlgorithm.fxml"));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-		scene = new Scene(r);
+		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		
-		
 	}
+	
 	public void DijkstraAlgorithm(ActionEvent event) throws IOException{
 		System.setProperty("user.dir", "Dijkstra");
-		r = FXMLLoader.load(getClass().getResource("DijkstraScreen.fxml"));
+		root = FXMLLoader.load(getClass().getResource("DijkstraScreen.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(r);
+		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	public void aStarAlgorithm(ActionEvent event) throws IOException{
 		System.setProperty("user.dir", "aStar");
-		r = FXMLLoader.load(getClass().getResource("AStarAlgorithm.fxml"));
+		root = FXMLLoader.load(getClass().getResource("AStarAlgorithm.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(r);
+		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}	
@@ -223,37 +220,38 @@ public class MainApplicationController implements Initializable {
 		isAddE = isMoveV = isRemoveV = isRemoveE = isChooseStartEndV = false;
 
 	}
+	
 	// Add Vertext Function 
 	public void AddVertextFunction() {
 		Configuration.allowMoveVertext = true;
 		myLabel.setText("Add vertext by clicking into white scene ");
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
 	}
 	
 	// Add Edge Function
 	public void AddEdgeFunction() {
 		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose an Vertext");
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
 	}
 	
 	// Remove Vertext function
 	public void RemoveVertextFunction() {
 		Configuration.allowMoveVertext = true;
 		myLabel.setText("Please choose an vertext to remove");
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
 	}
 	
 	
@@ -261,33 +259,33 @@ public class MainApplicationController implements Initializable {
 	public void MoveVertextFunction() {
 		Configuration.allowMoveVertext = true;
 		myLabel.setText("Drag mouse on an vertext to move");
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
 	}
 	
 	// Remove Edge function
 	public void RemoveEdgeFunction() {
-		Configuration.allowMoveVertext = true;
+		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose an Vertext");
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
 	}
 	
 	// Choose Start and End function
 	public void ChooseStartEndVertext() {
-		Configuration.allowMoveVertext = true;
+		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose Start Vertext");
-		MainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, ChooseStartEndVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddVertextHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, AddEdgeHandler);
-		MainPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, RemoveEdgeHandler);
+		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
+		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
 	}
 	
 	
@@ -300,9 +298,10 @@ public class MainApplicationController implements Initializable {
 			double x = e.getX();
 			double y = e.getY();
 			myLabel.setText("Add vertext by clicking into white scene ");
-			if(!Configuration.Nodeexist(x, y)) {
+			if(e.isPrimaryButtonDown() && !Configuration.Nodeexist(x, y)) {
+				System.out.println("new vertext");
 				Vertext newVertext = new Vertext(x, y);
-				MainPane.getChildren().addAll(newVertext, newVertext.getText());
+				MainPane.getChildren().add(newVertext.getStack());
 				Configuration.GraphNode.add(newVertext);
 				myLabel.setText("Add Vertext succefully!!");
 //				myLabel.setText("Add vertext by clicking into white scene ");
@@ -362,7 +361,6 @@ public class MainApplicationController implements Initializable {
 		@Override
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(e.isSecondaryButtonDown()) return;
 			myLabel.setText("Please choose an Vertext");
 			double x = e.getX();
 			double y = e.getY();
@@ -371,13 +369,13 @@ public class MainApplicationController implements Initializable {
 					
 					if(!FlagaddEdge) {
 						System.out.println("add Edge handler");
-						vertext.setFill(Color.GREEN);
+						vertext.setFill(Configuration.ChoseVertextColor);
 						tempVertextA = vertext;
 						myLabel.setText("Please choose another vertext to create edge");
 						FlagaddEdge = true;
 					}
 					else {
-						vertext.setFill(Color.GREEN);
+						vertext.setFill(Configuration.ChoseVertextColor);
 						if(vertext.equals(tempVertextA)){
 							FlagaddEdge = false;
 							tempVertextA.setFill(Configuration.VertextColor);
@@ -400,7 +398,8 @@ public class MainApplicationController implements Initializable {
 								MainPane.requestFocus();
 							}
 						});
-						MainPane.getChildren().addAll(newEdge, curtext);
+						MainPane.getChildren().add(0, newEdge);
+						MainPane.getChildren().add(curtext);
 						tempVertextA.addNeighbor(newEdge);
 						tempVertextB.addNeighbor(newEdge);
 						Configuration.GraphEdge.add(newEdge);
@@ -422,6 +421,8 @@ public class MainApplicationController implements Initializable {
 		@Override
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
+			// only left click
+			if(e.isSecondaryButtonDown()) return;
 			myLabel.setText("Please choose an vertext to remove");
 			double x = e.getX();
 			double y = e.getY();
@@ -429,14 +430,15 @@ public class MainApplicationController implements Initializable {
 			if(curVertext != null) {
 				for(Edge edge: curVertext.getNeighbors()) {
 					MainPane.getChildren().remove(edge.getText());
+					MainPane.getChildren().remove(edge);
 					Vertext anotherVertext = (edge.getEnd().equals(curVertext)) ? edge.getStart(): edge.getEnd();
 					anotherVertext.removeNeighbor(edge);
 					Configuration.RemoveEdge(edge);
 				}
-				MainPane.getChildren().removeAll(curVertext.getNeighbors());
+//				MainPane.getChildren().removeAll(curVertext.getNeighbors());
 				curVertext.removeAllNeighbor();
-				MainPane.getChildren().remove(curVertext);
-				MainPane.getChildren().remove(curVertext.getText());
+				MainPane.getChildren().remove(curVertext.getStack());
+//				MainPane.getChildren().remove(curVertext.getText());
 				int id = curVertext.getid();
 				Configuration.RemoveNode(id);
 				myLabel.setText("Remove Vertext succefully!!");
@@ -455,13 +457,14 @@ public class MainApplicationController implements Initializable {
 			double y = e.getY();
 			for(Vertext vertext : Configuration.GraphNode) {
 				if(vertext.checkClick(x, y)) {
-					vertext.setFill(Color.GREEN);
+					vertext.setFill(Configuration.ChoseVertextColor);
 					if(!FlagremoveEdge) {
 						tempVertextA = vertext;
 						myLabel.setText("Please choose another vertext to remove edge");
 						FlagremoveEdge = true;
 					}
 					else {
+						// if press on vertext A again
 						if(vertext.equals(tempVertextA)){
 							FlagremoveEdge = false;
 							tempVertextA.setFill(Configuration.VertextColor);
@@ -506,7 +509,7 @@ public class MainApplicationController implements Initializable {
 			MainPane.getChildren().addAll(edge, curtext);
 		}
 		for(Vertext v: Configuration.GraphNode) {
-			MainPane.getChildren().addAll(v, v.getText());
+			MainPane.getChildren().addAll(v.getStack());
 		}
 	}
 }

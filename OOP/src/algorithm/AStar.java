@@ -40,7 +40,7 @@ public class AStar {
 		Color cur = (Color) curVertex.getFill();
 		curVertex.setFill(Color.BLACK);
 		for(Edge edge: curVertex.getNeighbors()) {
-			edge.setStroke(Color.GREEN);
+			edge.setStroke(Color.PINK);
 			Vertext v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
 			double totalWeight = curVertex.getG() + edge.getWeight();
 			if (!openList.contains(v) && !closedList.contains(v)) {

@@ -172,7 +172,7 @@ public class DijkstraAlgorithmController implements Initializable {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
 		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext, vertext.getText(), vertext.getTextg());
+			MainPane.getChildren().addAll(vertext.getStack(), vertext.getTextg());
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class Dijkstra {
 		Color cur = (Color) curVertex.getFill();
 		curVertex.setFill(Color.BLACK);
 		for(Edge edge: curVertex.getNeighbors()) {
-			edge.setStroke(Color.GREEN);
+			edge.setStroke(Color.PINK);
 			Vertext v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
 			if(curVertex.getG() + edge.getWeight() < v.getG()) {
 				v.setG(curVertex.getG() + edge.getWeight());
