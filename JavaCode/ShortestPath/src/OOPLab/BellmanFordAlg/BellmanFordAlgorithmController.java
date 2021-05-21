@@ -98,7 +98,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 				e.setStroke(Color.GREEN);;
 				ConfigurationBFA.listBFA.add(cur.CopyBlock());
-				e.setFill(Color.BLUE);
+				e.setStroke(Color.BLUE);
 			}
 		}
 		System.out.println(cur.endVertext().getG());
@@ -221,7 +221,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
 		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext, vertext.getText(), vertext.getTextg());
+			MainPane.getChildren().addAll(vertext.getStack(), vertext.getTextg());
 		}
 	}
 	

@@ -2,12 +2,15 @@ package OOPLab.Element;
 
 import java.util.ArrayList;
 
+import com.sun.javafx.webkit.theme.ScrollBarWidgetHelper;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -24,7 +27,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	private double g = Double.MAX_VALUE;
 		// Heuristic
 	private double h;
-	
+	private StackPane stack =  new StackPane();
 	private ArrayList<Edge> neighbors = new ArrayList<>();
 	public Vertext(double x, double y) {
 		super(x, y, Configuration.radius, Configuration.VertextColor);
@@ -32,38 +35,43 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		text= new Text(String.valueOf(id));
 		textg = new Label("INF");
 		textg.setTextFill(Color.RED);
-		text.setLayoutX(this.getCenterX() + radius);
-		text.setLayoutY(this.getCenterY());
-		// mouse dragged event for Vertext
-		this.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		stack.getChildren().addAll(this, text);
+		stack.translateXProperty().bind(stack.widthProperty().divide(-2));
+		stack.translateYProperty().bind(stack.heightProperty().divide(-2));
+		stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+		stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
+		stack.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(Configuration.allowMoveVertext) {
+				if(e.isSecondaryButtonDown() && Configuration.allowMoveVertext) {
 					double x = e.getX(), y = e.getY();
 					System.out.println("mouse dragged");
 					setFill(Color.GREEN);
-					setCenterX(x);
-					setCenterY(y);
-					text.setLayoutX(getCenterX() + radius);
-					text.setLayoutY(getCenterY());
+					setCenterX(stack.getLayoutX() + x + stack.getTranslateX());
+					setCenterY(stack.getLayoutY() + y + stack.getTranslateY());
+					stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+					stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
 				}
-				
 			}
 		});
-		this.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		stack.setOnMouseReleased(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
-				// TODO Auto-generated method stub
 				if(Configuration.allowMoveVertext) {
 					System.out.println("Mouse release");
 					setFill(Configuration.VertextColor);
+					System.out.println(e.getX() + " " + getCenterX());
+					System.out.println(getLayoutX());
 				}
 			}
 		});
 
+	}
+	public StackPane getStack() {
+		return stack;
 	}
 	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, Paint color) {
 		super(x, y, Configuration.radius, color);
@@ -73,12 +81,15 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.f = f;
 		this.text = new Text(text);
 		this.textg = new Label(textg);
-		this.textg.setTextFill(Color.RED);
+		this.textg.setTextFill(Configuration.VertextColor);
 		this.textg.setStyle(Configuration.textColor);
-		this.text.setLayoutX(this.getCenterX() + radius);
-		this.text.setLayoutY(this.getCenterY());
 		this.textg.setLayoutX(this.getCenterX());
 		this.textg.setLayoutY(this.getCenterY() + radius);
+		this.stack.getChildren().addAll(this, this.text);
+		stack.translateXProperty().bind(stack.widthProperty().divide(-2));
+		stack.translateYProperty().bind(stack.heightProperty().divide(-2));
+		stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
+		stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
 	}
 	// copy vertext
 	public Vertext CopyVertext() {

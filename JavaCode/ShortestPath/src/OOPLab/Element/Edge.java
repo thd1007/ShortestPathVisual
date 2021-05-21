@@ -75,7 +75,6 @@ public class Edge extends Line {
 			}
 			
 		});
-
 		this.endXProperty().bind(this.end.centerXProperty());
 		this.endYProperty().bind(this.end.centerYProperty());
 		this.startXProperty().bind(this.start.centerXProperty());

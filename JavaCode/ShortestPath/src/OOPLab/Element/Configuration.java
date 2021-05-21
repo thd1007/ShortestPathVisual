@@ -31,7 +31,7 @@ public class Configuration {
 	public static int minWeight = 1;
 	
 	public static double textWeightwidth = 35, textWeighheight = 10;
-	public static double radius = 10;
+	public static double radius = 15;
 	public static List<Edge> GraphEdge = new ArrayList<Edge>();
 	public static List<Vertext> GraphNode = new ArrayList<Vertext>();
 	public static boolean Nodeexist(double x, double y) {
