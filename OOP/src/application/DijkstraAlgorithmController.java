@@ -155,9 +155,8 @@ public class DijkstraAlgorithmController implements Initializable {
 			v.setG(Double.MAX_VALUE);
 		}
 		
-		Configuration.startVertext = null;
-		Configuration.endVertext = null;
-		
+		Configuration.startVertext.setFill(Configuration.startColor);;
+		Configuration.endVertext.setFill(Configuration.endColor);
 		String dir = "MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();

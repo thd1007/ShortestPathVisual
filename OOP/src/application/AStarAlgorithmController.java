@@ -156,8 +156,8 @@ public class AStarAlgorithmController implements Initializable {
 			v.setF(0);
 		}
 		
-		Configuration.startVertext = null;
-		Configuration.endVertext = null;
+		Configuration.startVertext.setFill(Configuration.startColor);;
+		Configuration.endVertext.setFill(Configuration.endColor);
 		
 		String dir = "MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));

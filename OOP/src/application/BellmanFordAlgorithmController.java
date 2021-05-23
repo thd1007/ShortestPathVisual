@@ -84,6 +84,7 @@ public class BellmanFordAlgorithmController implements Initializable {
 		ConfigurationBFA.listBFA.add(curBlock);
 	}
 	private void show() {
+		ConfigurationBFA.listBFA.clear();
 		// initialize start vertext g
 		Configuration.startVertext.setG(0);
 		// create block
@@ -208,7 +209,18 @@ public class BellmanFordAlgorithmController implements Initializable {
 		});
 	}
 	public void BackMain(ActionEvent e) throws IOException {
-		String dir = "C:\\Users\\Nguyen Hoang Vu\\eclipse-workspace\\Shortest-Path-GUI\\OOPLab\\MainApplicationController.java";
+		// Draw again in Main
+				for(Edge edge: Configuration.GraphEdge) {
+					edge.setStroke(Color.BLUE);
+				}
+				for(Vertext v: Configuration.GraphNode) {
+					v.setFill(Color.RED);
+					v.setG(Double.MAX_VALUE);
+				}
+				Configuration.startVertext.setFill(Configuration.startColor);;
+				Configuration.endVertext.setFill(Configuration.endColor);
+				
+		String dir = "MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
