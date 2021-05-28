@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import Element.Configuration;
 import Element.Edge;
 import Element.Vertext;
@@ -57,9 +59,9 @@ public class MainApplicationController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		show();
-		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
-		AddVertextrb.setTextFill(Configuration.VertextColor);
-		isAddV = true;
+//		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddVertextHandler);
+//		AddVertextrb.setTextFill(Configuration.VertextColor);
+//		isAddV = false;
 		AddVertextrb.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -179,8 +181,9 @@ public class MainApplicationController implements Initializable {
 	}
 	// BellmanFord Algorithm
 	public void BellmanFordAlgorithmFunction(ActionEvent e) throws IOException {
+		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "BellmanFordAlgorithm");
-		root = FXMLLoader.load(getClass().getResource("BellmanFordAlgorithm.fxml"));
+		root = FXMLLoader.load(getClass().getResource("BellmanFord/BellmanFordAlgorithm.fxml"));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -188,8 +191,9 @@ public class MainApplicationController implements Initializable {
 	}
 	
 	public void DijkstraAlgorithm(ActionEvent event) throws IOException{
+		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "Dijkstra");
-		root = FXMLLoader.load(getClass().getResource("DijkstraScreen.fxml"));
+		root = FXMLLoader.load(getClass().getResource("Dijkstra/DijkstraScreen.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -197,8 +201,9 @@ public class MainApplicationController implements Initializable {
 	}
 	
 	public void aStarAlgorithm(ActionEvent event) throws IOException{
+		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "aStar");
-		root = FXMLLoader.load(getClass().getResource("AStarAlgorithm.fxml"));
+		root = FXMLLoader.load(getClass().getResource("AStar/AStarAlgorithm.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -495,7 +500,7 @@ public class MainApplicationController implements Initializable {
 		
 	};
 	private void show() {
-		if(Configuration.GraphNode.isEmpty() || Configuration.GraphEdge.isEmpty()) return;
+		if(Configuration.GraphNode.isEmpty()) return;
 		for(Edge edge: Configuration.GraphEdge) {
 			TextField curtext = edge.getText();
 			curtext.setOnAction(new EventHandler<ActionEvent>() {
@@ -511,5 +516,12 @@ public class MainApplicationController implements Initializable {
 		for(Vertext v: Configuration.GraphNode) {
 			MainPane.getChildren().addAll(v.getStack());
 		}
+	}
+	private boolean CheckStartEndVertext() {
+		if(Configuration.startVertext == null || Configuration.endVertext == null) {
+			JOptionPane.showMessageDialog(null,"Check again start and end Vertext");
+			return false;
+		}
+		return true;
 	}
 }
