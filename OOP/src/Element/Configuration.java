@@ -6,9 +6,14 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 public class Configuration {
 	
+	// text color in vertex
+	public static Color text_color = Color.WHITE;
+	// font color of text in vertex
+	public static Font text_font = Font.font(15);
 	// Edge line with
 	public static double Linewidth = 3;
 	// color vertext
@@ -24,14 +29,14 @@ public class Configuration {
 	public static Vertext startVertext = null;
 	public static Vertext endVertext = null;
 	// end color is yellow
-	public static Paint endColor = Color.YELLOW;
+	public static Paint endColor = Color.web("#ffb42e");
 	public static String textColor = "-fx-text-inner-color: red";
 	
 	public static int maxWeight = 300;
 	public static int minWeight = 1;
 	
 	public static double textWeightwidth = 35, textWeighheight = 10;
-	public static double radius = 10;
+	public static double radius = 15;
 	public static List<Edge> GraphEdge = new ArrayList<Edge>();
 	public static List<Vertext> GraphNode = new ArrayList<Vertext>();
 	public static boolean Nodeexist(double x, double y) {

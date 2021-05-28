@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Vertext extends Circle implements Comparable<Vertext> {
@@ -37,6 +38,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		super(x, y, Configuration.radius, Configuration.VertextColor);
 		id = Configuration.GraphNode.size();
 		text= new Text(String.valueOf(id));
+		this.text.setStroke(Configuration.text_color);
+		this.text.setFont(Configuration.text_font);
 		textg = new Label("Dist: INF");
 		textg.setTextFill(Color.RED);
 		
@@ -61,7 +64,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 				// TODO Auto-generated method stub
 				if(e.isSecondaryButtonDown() && Configuration.allowMoveVertext) {
 					double x = e.getX(), y = e.getY();
-					System.out.println("mouse dragged");
+//					System.out.println("mouse dragged");
 					setFill(Color.GREEN);
 					setCenterX(stack.getLayoutX() + x + stack.getTranslateX());
 					setCenterY(stack.getLayoutY() + y + stack.getTranslateY());
@@ -75,7 +78,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 			@Override
 			public void handle(MouseEvent e) {
 				if(Configuration.allowMoveVertext) {
-					System.out.println("Mouse release");
+//					System.out.println("Mouse release");
 					setFill(Configuration.VertextColor);
 					System.out.println(e.getX() + " " + getCenterX());
 					System.out.println(getLayoutX());
@@ -94,6 +97,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.g = g;
 		this.f = f;
 		this.text = new Text(text);
+		this.text.setStroke(Configuration.text_color);
+		this.text.setFont(Configuration.text_font);
 		this.textg = new Label(textg);
 		this.textga = new Label(textg);
 		this.textfa = new Label(textf);

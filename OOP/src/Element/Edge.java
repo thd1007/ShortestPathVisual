@@ -3,6 +3,8 @@ package Element;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import application.MainApplicationController;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -51,7 +53,9 @@ public class Edge extends Line {
 		this.weight = new Random().nextInt(Configuration.maxWeight - Configuration.minWeight) + Configuration.minWeight;
 		
 		text = new TextField(String.valueOf(this.weight));
-		text.setMaxSize(textwidth, textheight);
+//		text.setMaxSize(textwidth, textheight);
+		text.setPrefHeight(textheight);
+		text.setPrefWidth(textwidth);
 	
 		// assignment text Layout
 		text.setLayoutX(PosTextx());
@@ -65,11 +69,12 @@ public class Edge extends Line {
 				if(t.getCode() == KeyCode.ENTER) {
 					try {
 						weight = Integer.valueOf(text.getText());
-						System.out.println("Edge id: " + ID + " weight " + weight);
+//						System.out.println("Edge id: " + ID + " weight " + weight);
 						text.cancelEdit();
 					}
 					catch(Exception e){
-						System.out.println("Error in weight");
+						JOptionPane.showMessageDialog(null, "Weight wrong format");
+//						System.out.println("Error in weight");
 					}
 				}
 			}
