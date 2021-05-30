@@ -21,7 +21,7 @@ public class Dijkstra {
 		pq.clear();
 		eachStep.clear();
 		for(Vertext v: Configuration.GraphNode) {
-			
+			v.setmyParent(null);
 			if(Configuration.startVertext.getCenterX() == v.getCenterX() && Configuration.startVertext.getCenterY() == v.getCenterY()) {
 				v.setG(0);
 			}
@@ -39,10 +39,11 @@ public class Dijkstra {
 		Color cur = (Color) curVertex.getFill();
 		curVertex.setFill(Color.BLACK);
 		for(Edge edge: curVertex.getNeighbors()) {
-			edge.setStroke(Color.PINK);
+			edge.setStroke(Color.GREEN);
 			Vertext v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
 			if(curVertex.getG() + edge.getWeight() < v.getG()) {
 				v.setG(curVertex.getG() + edge.getWeight());
+				v.setmyParent(curVertex);
 				pq.add(v);
 			}
 		}
@@ -50,7 +51,17 @@ public class Dijkstra {
 		eachStep.add(step);
 		curVertex.setFill(cur);
 	}
-	
+	private static void showPath(Vertext v) {
+		if(v.myParent() == null) return;
+		for(Edge edge: Configuration.GraphEdge) {
+			Vertext start = edge.getStart();
+			Vertext end = edge.getEnd();
+			if((start.equals(v) && end.equals(v.myParent())) || (start.equals(v.myParent()) && end.equals(v))){
+				edge.setStroke(Color.PINK);
+			}
+		}
+		showPath(v.myParent());
+	}
 	public static void run() {
 		if(Configuration.startVertext == null || Configuration.endVertext == null) 
 			return;
@@ -62,6 +73,9 @@ public class Dijkstra {
 			
 			step(u);
 		}
+		showPath(Configuration.endVertext);
+		Block final_state = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		eachStep.add(final_state);
 		System.out.println(Configuration.endVertext.getG());
 	}
 }

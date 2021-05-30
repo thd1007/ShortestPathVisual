@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 
 public class Vertext extends Circle implements Comparable<Vertext> {
 	private int id; 
+	private Vertext parent = null;
 	private double radius = Configuration.radius;
 	private Text text;
 	private Label textg;
@@ -245,10 +246,17 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public VBox getVBox() {
 		return vbox;
 	}
+	public Vertext myParent() {
+		return parent;
+	}
+	public void setmyParent(Vertext parent) {
+		this.parent = parent;
+	}
+	// round 2 number
 	public double calculateHeuristic(Vertext target){
-		return  Math.sqrt(
+		return  (double)(Math.round(Math.sqrt(
                 Math.pow( this.getLayoutY() - target.getLayoutY(), 2 ) +
-                Math.pow( this.getLayoutX() - target.getLayoutX(), 2 ));
+                Math.pow( this.getLayoutX() - target.getLayoutX(), 2 ))*100)/100.0);
 	}
 	
 }

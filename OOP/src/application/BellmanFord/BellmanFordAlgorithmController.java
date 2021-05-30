@@ -106,6 +106,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		}
 		System.out.println(cur.endVertext().getG());
 		findpath(cur);
+		//Block final_state = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		//ConfigurationBFA.listBFA.add(final_state);
 		Configuration.startVertext.setG(Double.MAX_VALUE);
 	}
 	

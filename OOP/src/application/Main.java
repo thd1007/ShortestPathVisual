@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("./MainApplication.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("MainApplication.fxml")); //./MainApplication.fxml
 			Scene scene = new Scene(root);
 			// Icon image//
 			Image icon = new Image("pathFindingicons.png");
