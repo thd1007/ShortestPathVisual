@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public abstract class AlgorithmController {
@@ -24,6 +25,11 @@ public abstract class AlgorithmController {
 		protected AnchorPane MainPane;
 		@FXML
 		protected Label myLabel;
+		// for using css
+		// for background image
+		protected AnchorPane anchorP;
+		protected VBox vbox;
+		protected AnchorPane myAnchor;
 		
 		// For showing to Screen
 		protected int index = 1;

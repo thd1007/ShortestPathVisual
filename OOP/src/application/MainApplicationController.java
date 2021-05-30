@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -32,6 +34,12 @@ public class MainApplicationController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	@FXML
+	private AnchorPane myAnchor;
+	@FXML
+	private AnchorPane pane;
+	@FXML
+	private VBox myVbox;
 	@FXML
 	private Button AddVertextrb, AddEdgerb, MoveVertextrb, RemoveVertextrb, RemoveEdgerb, ChooseStartEndVertextrb;
 	@FXML 
@@ -186,6 +194,7 @@ public class MainApplicationController implements Initializable {
 		root = FXMLLoader.load(getClass().getResource("BellmanFord/BellmanFordAlgorithm.fxml"));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -196,6 +205,7 @@ public class MainApplicationController implements Initializable {
 		root = FXMLLoader.load(getClass().getResource("Dijkstra/DijkstraScreen.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -206,6 +216,7 @@ public class MainApplicationController implements Initializable {
 		root = FXMLLoader.load(getClass().getResource("AStar/AStarAlgorithm.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}	
@@ -239,6 +250,7 @@ public class MainApplicationController implements Initializable {
 	
 	// Add Edge Function
 	public void AddEdgeFunction() {
+		if(!CheckCanAddEdge()) return;
 		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose an Vertext");
 		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, AddEdgeHandler);
@@ -250,6 +262,7 @@ public class MainApplicationController implements Initializable {
 	
 	// Remove Vertext function
 	public void RemoveVertextFunction() {
+		if(!CheckAnyVertex()) return;
 		Configuration.allowMoveVertext = true;
 		myLabel.setText("Please choose an vertext to remove");
 		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
@@ -262,6 +275,7 @@ public class MainApplicationController implements Initializable {
 	
 	// Move Vertext function
 	public void MoveVertextFunction() {
+		if(!CheckAnyVertex()) return;
 		Configuration.allowMoveVertext = true;
 		myLabel.setText("Drag mouse on an vertext to move");
 		MainPane.removeEventHandler(MouseEvent.MOUSE_PRESSED, RemoveVertextHandler);
@@ -273,6 +287,7 @@ public class MainApplicationController implements Initializable {
 	
 	// Remove Edge function
 	public void RemoveEdgeFunction() {
+		if(!CheckCanRemoveEdge()) return;
 		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose an Vertext");
 		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, RemoveEdgeHandler);
@@ -520,6 +535,30 @@ public class MainApplicationController implements Initializable {
 	private boolean CheckStartEndVertext() {
 		if(Configuration.startVertext == null || Configuration.endVertext == null) {
 			JOptionPane.showMessageDialog(null,"Check again start and end Vertext");
+			return false;
+		}
+		return true;
+	}
+	// use for check move can use or remove can use
+	private boolean CheckAnyVertex() {
+		if(Configuration.GraphNode.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No vertex here");
+			return false;
+		}
+		return true;
+	}
+	// use for check add edge
+	private boolean CheckCanAddEdge() {
+		if(Configuration.GraphNode.size() < 2) {
+			JOptionPane.showMessageDialog(null, "Check again the number of vertext");
+			return false;
+		}
+		return true;
+	}
+	// use for check can remove edge
+	private boolean CheckCanRemoveEdge() {
+		if(Configuration.GraphEdge.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No edge to remove");
 			return false;
 		}
 		return true;

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -13,7 +14,13 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("./MainApplication.fxml"));
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			// Icon image//
+			Image icon = new Image("pathFindingicons.png");
+			// Set icon
+			primaryStage.getIcons().add(icon);
+			// Set title
+			primaryStage.setTitle("PathFinding");
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
