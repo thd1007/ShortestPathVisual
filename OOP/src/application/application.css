@@ -29,7 +29,7 @@
 	-fx-font-weight: bold;
 }
 #myAnchor{
-	-fx-background-image: url("dino.jpg");
+	-fx-background-image: url("/application/dino.jpg");
 }
 #myVbox{
 	-fx-background-color: #e6ffff;

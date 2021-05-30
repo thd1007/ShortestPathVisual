@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="413.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HelpController">
+   <children>
+      <TextArea fx:id="helpTextArea" prefHeight="502.0" prefWidth="396.0" text="- khi sử dụng tất cả các nút ô trong ô trái trên đều có thể move vertext trừ addedge button&#10;- khi sử dụng reset, hệ thống tự động trở về nút add vertext&#10;- khi trong chế độ tạo edge, khi chọn start vertext có thể bấm lại vào node vừa chọn để hủy thao tác vừa thực hiện&#10;- khi trong chế độ tạo start end, từ trạng thái start có thể tạo end hoặc hủy back lại thao tác chọn start. khi từ trạng thái end&#10;có thể back lại chính thao tác tạo end click lại end V vừa tao &#10;- khi thay đổi weight, sau khi nhập cần enter để kêt thúc thao tác" />
+   </children>
+</AnchorPane>

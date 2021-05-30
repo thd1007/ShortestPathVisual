@@ -8,7 +8,7 @@
     -fx-font-size: 1.1em;
 }
 #anchorP{
-	-fx-background-image: url("dino.jpg");
+	-fx-background-image: url("/application/dino.jpg");
 }
 #vbox{
 	-fx-background-color: #e6ffff;

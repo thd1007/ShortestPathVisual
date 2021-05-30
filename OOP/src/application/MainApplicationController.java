@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
-
 import Element.Configuration;
 import Element.Edge;
 import Element.Vertext;
@@ -41,7 +40,8 @@ public class MainApplicationController implements Initializable {
 	@FXML
 	private VBox myVbox;
 	@FXML
-	private Button AddVertextrb, AddEdgerb, MoveVertextrb, RemoveVertextrb, RemoveEdgerb, ChooseStartEndVertextrb;
+	private Button AddVertextrb, AddEdgerb, MoveVertextrb, RemoveVertextrb, 
+				RemoveEdgerb, ChooseStartEndVertextrb, helpButton;
 	@FXML 
 	private AnchorPane MainPane;
 	@FXML
@@ -165,6 +165,19 @@ public class MainApplicationController implements Initializable {
 				isAddV = isMoveV = isAddE = isRemoveE = isRemoveV = false;
 			}
 		});
+		helpButton.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Help.fxml"));
+			try {
+				Parent root1;
+				root1 = loader.load();
+				Stage stage1 = new Stage();
+				stage1.setScene(new Scene(root1));
+				stage1.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 	}
 	// action function for radio button
 	public void ActionEventFunc(ActionEvent e) {
@@ -191,10 +204,10 @@ public class MainApplicationController implements Initializable {
 	public void BellmanFordAlgorithmFunction(ActionEvent e) throws IOException {
 		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "BellmanFordAlgorithm");
-		root = FXMLLoader.load(getClass().getResource("BellmanFord/BellmanFordAlgorithm.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/application/BellmanFord/BellmanFordAlgorithm.fxml"));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -202,10 +215,10 @@ public class MainApplicationController implements Initializable {
 	public void DijkstraAlgorithm(ActionEvent event) throws IOException{
 		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "Dijkstra");
-		root = FXMLLoader.load(getClass().getResource("Dijkstra/DijkstraScreen.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/application/Dijkstra/DijkstraScreen.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -213,10 +226,10 @@ public class MainApplicationController implements Initializable {
 	public void aStarAlgorithm(ActionEvent event) throws IOException{
 		if(!CheckStartEndVertext()) return;
 		System.setProperty("user.dir", "aStar");
-		root = FXMLLoader.load(getClass().getResource("AStar/AStarAlgorithm.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/application/AStar/AStarAlgorithm.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("astar.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/astar.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}	

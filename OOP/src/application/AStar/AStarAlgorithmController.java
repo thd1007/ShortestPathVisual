@@ -161,11 +161,11 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 		Configuration.startVertext.setFill(Configuration.startColor);;
 		Configuration.endVertext.setFill(Configuration.endColor);
 		
-		String dir = "../MainApplication.fxml";
+		String dir = "/application/MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}

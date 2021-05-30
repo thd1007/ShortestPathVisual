@@ -75,12 +75,23 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			}
 		}
 		int count = 0;
+		Vertext ver1 = null;
 		while(!Stack1.isEmpty())
 		{	
 			Vertext ver = Stack1.pop();
+			
 			if(ver.getFill().equals(Color.RED)) {
 				ver.setFill(Color.GREEN);
 			}
+			if(ver1 != null) {
+				for(Edge edge: curBlock.listEdge) {
+					if((edge.getStart().equals(ver1) && edge.getEnd().equals(ver)) || 
+							(edge.getStart().equals(ver) && edge.getEnd().equals(ver1))){
+						edge.setStroke(Color.DEEPPINK);
+					}
+				}
+			}
+			ver1 = ver;
 		}
 		ConfigurationBFA.listBFA.add(curBlock);
 	}
@@ -226,11 +237,11 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 				Configuration.startVertext.setFill(Configuration.startColor);;
 				Configuration.endVertext.setFill(Configuration.endColor);
 				
-		String dir = "../MainApplication.fxml";
+		String dir = "/application/MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}

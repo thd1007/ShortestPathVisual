@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -7,53 +12,56 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="875.0" style="-fx-background-color: #02075d;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AStar.AStarAlgorithmController">
-   <children>
-      <AnchorPane fx:id="MainPane" layoutX="269.0" layoutY="62.0" prefHeight="709.0" prefWidth="558.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="62.0" />
-      <VBox fx:id="vbox" layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="215.0">
-         <children>
-            <Button fx:id="startButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Play">
-               <VBox.margin>
-                  <Insets left="40.0" top="25.0" />
-               </VBox.margin></Button>
-            <Button fx:id="preButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Previous">
-               <VBox.margin>
-                  <Insets left="40.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Next">
-               <VBox.margin>
-                  <Insets left="40.0" top="30.0" />
-               </VBox.margin></Button>
-            <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Pause">
-               <VBox.margin>
-                  <Insets left="40.0" top="30.0" />
-               </VBox.margin></Button>
-            <Button fx:id="FirstStateButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="First State">
-               <VBox.margin>
-                  <Insets left="40.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="LastStateButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Last State">
-               <VBox.margin>
-                  <Insets left="40.0" top="30.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <AnchorPane fx:id="myAnchor" layoutX="14.0" layoutY="518.0" prefHeight="242.0" prefWidth="215.0">
-         <children>
-            <Button fx:id="backButton" layoutX="55.0" layoutY="103.0" mnemonicParsing="false" onAction="#BackMain" text="Back Main">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <Label fx:id="myLabel" layoutX="270.0" layoutY="20.0" prefHeight="27.0" prefWidth="573.0" text="                                            AStar Algorithm " textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane fx:id="anchorP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="875.0" style="-fx-background-color: #02075d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AStar.AStarAlgorithmController">
+	<children>
+		<AnchorPane fx:id="MainPane" layoutX="269.0" layoutY="62.0" prefHeight="709.0" prefWidth="558.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="62.0" />
+		<VBox fx:id="vbox" layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="215.0">
+			<children>
+				<Button fx:id="startButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Play">
+					<VBox.margin>
+						<Insets left="40.0" top="25.0" />
+					</VBox.margin>
+				</Button>
+				<Button fx:id="preButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Previous">
+					<VBox.margin>
+						<Insets left="40.0" top="30.0" />
+					</VBox.margin>
+				</Button>
+				<Button fx:id="nextButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Next">
+					<VBox.margin>
+						<Insets left="40.0" top="30.0" />
+					</VBox.margin>
+				</Button>
+				<Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Pause">
+					<VBox.margin>
+						<Insets left="40.0" top="30.0" />
+					</VBox.margin>
+				</Button>
+				<Button fx:id="FirstStateButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="First State">
+					<VBox.margin>
+						<Insets left="40.0" top="30.0" />
+					</VBox.margin>
+				</Button>
+				<Button fx:id="LastStateButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Last State">
+					<VBox.margin>
+						<Insets left="40.0" top="30.0" />
+					</VBox.margin>
+				</Button>
+			</children>
+		</VBox>
+		<AnchorPane fx:id="myAnchor" layoutX="14.0" layoutY="518.0" prefHeight="242.0" prefWidth="215.0">
+			<children>
+				<Button fx:id="backButton" layoutX="40.0" layoutY="103.0" mnemonicParsing="false" onAction="#BackMain" prefHeight="52.0" prefWidth="130.0" text="Back Main">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Button>
+			</children>
+		</AnchorPane>
+		<Label fx:id="myLabel" layoutX="270.0" layoutY="20.0" prefHeight="27.0" prefWidth="573.0" text="                                            AStar Algorithm " textAlignment="CENTER" textFill="WHITE">
+			<font>
+				<Font name="System Bold" size="18.0" />
+			</font>
+		</Label>
+	</children>
 </AnchorPane>
