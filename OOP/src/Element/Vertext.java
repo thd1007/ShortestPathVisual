@@ -24,6 +24,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	private Label textg;
 	private Label textfa;
 	private Label textga;
+	private Label textha;
 	
 	// A* variable by Dang
 	private double f = Double.MAX_VALUE;
@@ -45,10 +46,12 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		
 		textga = new Label("Dist: INF");
 		textfa = new Label("Cost: 0.0");
+		textha = new Label("Heuristic: 0.0");
 		textfa.setTextFill(Color.RED);
 		textga.setTextFill(Color.RED);
+		textha.setTextFill(Color.RED);
 		
-		vbox.getChildren().addAll(textga, textfa);
+		vbox.getChildren().addAll(textga, textfa, textha);
 		vbox.setLayoutX(this.getCenterX() + 3);
 		vbox.setLayoutY(this.getCenterY() + 15);
 		
@@ -90,7 +93,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public StackPane getStack() {
 		return stack;
 	}
-	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, Paint color) {
+	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, String texth, Paint color) {
 		super(x, y, Configuration.radius, color);
 		this.id = id;
 		this.h = h;
@@ -102,15 +105,17 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.textg = new Label(textg);
 		this.textga = new Label(textg);
 		this.textfa = new Label(textf);
+		this.textha = new Label(texth);
 		
 		textfa.setTextFill(Color.RED);
 		textga.setTextFill(Color.RED);
+		textha.setTextFill(Color.RED);
 		this.textg.setTextFill(Configuration.VertextColor);
 		this.textg.setStyle(Configuration.textColor);
 		this.textg.setLayoutX(this.getCenterX());
 		this.textg.setLayoutY(this.getCenterY() + radius);
 		
-		this.vbox.getChildren().addAll(textfa, textga);
+		this.vbox.getChildren().addAll(textfa, textga, textha);
 		vbox.setLayoutX(this.getCenterX() + 3);
 		vbox.setLayoutY(this.getCenterY() + 15);
 		
@@ -122,7 +127,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	}
 	// copy vertext
 	public Vertext CopyVertext() {
-		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textfa.getText(), this.getFill());
+		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textfa.getText(), textha.getText(), this.getFill());
 	}
 	public void setId(int id) {
 		text.setText(String.valueOf(id));
@@ -227,6 +232,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		return h;
 	}
 	public void setH(double h) {
+		if(h == 0) textha.setText("Heuristic: 0.0");
+		else textha.setText("Heuristic: " + String.valueOf(h));
 		this.h = h;
 	}
 	public Text getText() {
@@ -238,4 +245,10 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public VBox getVBox() {
 		return vbox;
 	}
+	public double calculateHeuristic(Vertext target){
+		return  Math.sqrt(
+                Math.pow( this.getLayoutY() - target.getLayoutY(), 2 ) +
+                Math.pow( this.getLayoutX() - target.getLayoutX(), 2 ));
+	}
+	
 }

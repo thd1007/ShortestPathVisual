@@ -24,10 +24,12 @@ public class AStar {
 			if(Configuration.startVertext.getCenterX() == v.getCenterX() && Configuration.startVertext.getCenterY() == v.getCenterY()) {
 				v.setG(0);
 				v.setF(0);
+				v.setH(v.calculateHeuristic(Configuration.endVertext));
 			}
 			else {
 				v.setG(Double.MAX_VALUE);
 				v.setF(0);
+				v.setH(v.calculateHeuristic(Configuration.endVertext));
 			}
 		}
 		
