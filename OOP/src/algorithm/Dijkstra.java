@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import Element.Block;
 import Element.Configuration;
 import Element.Edge;
-import Element.Vertext;
+import Element.Vertex;
 import javafx.animation.FillTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.StrokeTransition;
@@ -16,15 +16,15 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class Dijkstra {
-	private static PriorityQueue<Vertext> pq = new PriorityQueue<Vertext>();
+	private static PriorityQueue<Vertex> pq = new PriorityQueue<Vertex>();
 	public static ArrayList<Block> eachStep = new ArrayList<Block>();
 	
 	private static void initState() {
 		pq.clear();
 		eachStep.clear();
-		for(Vertext v: Configuration.GraphNode) {
+		for(Vertex v: Configuration.GraphNode) {
 			v.setmyParent(null);
-			if(Configuration.startVertext.getCenterX() == v.getCenterX() && Configuration.startVertext.getCenterY() == v.getCenterY()) {
+			if(Configuration.startVertex.getCenterX() == v.getCenterX() && Configuration.startVertex.getCenterY() == v.getCenterY()) {
 				v.setG(0);
 			}
 			else {
@@ -32,17 +32,17 @@ public class Dijkstra {
 			}
 		}
 		
-		pq.add(Configuration.startVertext);
+		pq.add(Configuration.startVertex);
 		Block init = new Block(Configuration.GraphEdge, Configuration.GraphNode);
 		eachStep.add(init);
 	}
 	
-	private static void step(Vertext curVertex) {
+	private static void step(Vertex curVertex) {
 		Color cur = (Color) curVertex.getFill();
 		curVertex.setFill(Color.BLACK);
 		for(Edge edge: curVertex.getNeighbors()) {
 			edge.setStroke(Color.GREEN);
-			Vertext v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
+			Vertex v = edge.getStart() == curVertex ? edge.getEnd() : edge.getStart();
 			if(curVertex.getG() + edge.getWeight() < v.getG()) {
 				v.setG(curVertex.getG() + edge.getWeight());
 				v.setmyParent(curVertex);
@@ -53,11 +53,11 @@ public class Dijkstra {
 		eachStep.add(step);
 		curVertex.setFill(cur);
 	}
-	private static void showPath(Vertext v) {
+	private static void showPath(Vertex v) {
 		if(v.myParent() == null) return;
 		for(Edge edge: Configuration.GraphEdge) {
-			Vertext start = edge.getStart();
-			Vertext end = edge.getEnd();
+			Vertex start = edge.getStart();
+			Vertex end = edge.getEnd();
 			if((start.equals(v) && end.equals(v.myParent())) || (start.equals(v.myParent()) && end.equals(v))){
 				edge.setStroke(Color.DEEPPINK);
 			}
@@ -65,19 +65,19 @@ public class Dijkstra {
 		showPath(v.myParent());
 	}
 	public static void run() {
-		if(Configuration.startVertext == null || Configuration.endVertext == null) 
+		if(Configuration.startVertex == null || Configuration.endVertex == null) 
 			return;
 		
 		initState();
 		
 		while(!pq.isEmpty()) {
-			Vertext u = pq.poll();
+			Vertex u = pq.poll();
 			
 			step(u);
 		}
-		showPath(Configuration.endVertext);
+		showPath(Configuration.endVertex);
 		Block final_state = new Block(Configuration.GraphEdge, Configuration.GraphNode);
 		eachStep.add(final_state);
-		System.out.println(Configuration.endVertext.getG());
+		System.out.println(Configuration.endVertex.getG());
 	}
 }

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import Element.Block;
 import Element.Configuration;
 import Element.Edge;
-import Element.Vertext;
+import Element.Vertex;
 import algorithm.Dijkstra;
 import application.AlgorithmController;
 import javafx.animation.KeyFrame;
@@ -49,7 +49,7 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// run program
-		if(Configuration.startVertext == null || Configuration.endVertext == null) {
+		if(Configuration.startVertex == null || Configuration.endVertex == null) {
 			System.out.println("start end null");
 			return;
 		}
@@ -170,13 +170,13 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 		for(Edge edge: Configuration.GraphEdge) {
 			edge.setStroke(Color.BLUE);
 		}
-		for(Vertext v: Configuration.GraphNode) {
+		for(Vertex v: Configuration.GraphNode) {
 			v.setFill(Color.RED);
 			v.setG(Double.MAX_VALUE);
 		}
 		
-		Configuration.startVertext.setFill(Configuration.startColor);;
-		Configuration.endVertext.setFill(Configuration.endColor);
+		Configuration.startVertex.setFill(Configuration.startColor);;
+		Configuration.endVertex.setFill(Configuration.endColor);
 		String dir = "/application/MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -192,8 +192,8 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 		for(Edge edge: block.listEdge) {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
-		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext.getStack(), vertext.getTextg());
+		for(Vertex Vertex: block.listNode) {
+			MainPane.getChildren().addAll(Vertex.getStack(), Vertex.getTextg());
 		}
 	}
 }

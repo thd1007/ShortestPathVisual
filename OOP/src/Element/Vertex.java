@@ -17,9 +17,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class Vertext extends Circle implements Comparable<Vertext> {
+public class Vertex extends Circle implements Comparable<Vertex> {
 	private int id; 
-	private Vertext parent = null;
+	private Vertex parent = null;
 	private double radius = Configuration.radius;
 	private Text text;
 	private Label textg;
@@ -36,8 +36,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	private VBox vbox = new VBox(5);
 	
 	private ArrayList<Edge> neighbors = new ArrayList<>();
-	public Vertext(double x, double y) {
-		super(x, y, Configuration.radius, Configuration.VertextColor);
+	public Vertex(double x, double y) {
+		super(x, y, Configuration.radius, Configuration.VertexColor);
 		id = Configuration.GraphNode.size();
 		text= new Text(String.valueOf(id));
 		this.text.setStroke(Configuration.text_color);
@@ -66,7 +66,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 			@Override
 			public void handle(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(e.isSecondaryButtonDown() && Configuration.allowMoveVertext) {
+				if(e.isSecondaryButtonDown() && Configuration.allowMoveVertex) {
 					double x = e.getX(), y = e.getY();
 //					System.out.println("mouse dragged");
 					setFill(Color.GREEN);
@@ -81,9 +81,9 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 
 			@Override
 			public void handle(MouseEvent e) {
-				if(Configuration.allowMoveVertext) {
+				if(Configuration.allowMoveVertex) {
 //					System.out.println("Mouse release");
-					setFill(Configuration.VertextColor);
+					setFill(Configuration.VertexColor);
 					System.out.println(e.getX() + " " + getCenterX());
 					System.out.println(getLayoutX());
 				}
@@ -94,7 +94,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public StackPane getStack() {
 		return stack;
 	}
-	public Vertext(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, String texth, Paint color) {
+	public Vertex(double x, double y, int id, double h, double g, double f, String text, String textg, String textf, String texth, Paint color) {
 		super(x, y, Configuration.radius, color);
 		this.id = id;
 		this.h = h;
@@ -111,7 +111,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		textfa.setTextFill(Color.RED);
 		textga.setTextFill(Color.RED);
 		textha.setTextFill(Color.RED);
-		this.textg.setTextFill(Configuration.VertextColor);
+		this.textg.setTextFill(Configuration.VertexColor);
 		this.textg.setStyle(Configuration.textColor);
 		this.textg.setLayoutX(this.getCenterX());
 		this.textg.setLayoutY(this.getCenterY() + radius);
@@ -126,9 +126,9 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		stack.setLayoutX(stack.getLayoutX() + x + stack.getTranslateX());
 		stack.setLayoutY(stack.getLayoutY() + y + stack.getTranslateY());
 	}
-	// copy vertext
-	public Vertext CopyVertext() {
-		return new Vertext(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textfa.getText(), textha.getText(), this.getFill());
+	// copy Vertex
+	public Vertex CopyVertex() {
+		return new Vertex(this.getCenterX(), this.getCenterY(), this.getid(), this.h, this.g, this.f, text.getText(), textg.getText(), textfa.getText(), textha.getText(), this.getFill());
 	}
 	public void setId(int id) {
 		text.setText(String.valueOf(id));
@@ -143,12 +143,12 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		double b = Math.pow((this.getCenterY() - y), 2);
 		return (a + b <= Math.pow(this.getRadius(), 2));
 	}
-	public boolean equals(Vertext b) {
+	public boolean equals(Vertex b) {
 		// TODO Auto-generated method stub
 		return (b.getCenterX() == this.getCenterX() && b.getCenterY() == this.getCenterY());
 	}
 	@Override
-	public int compareTo(Vertext n) {
+	public int compareTo(Vertex n) {
 		// TODO Auto-generated method stub
 		return Double.compare(this.f, n.getF());
 	}
@@ -165,29 +165,29 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		}
 	}
 	
-	/// remove neighbor by Vertext
-	public void removeNeighbor(Vertext vertext) {
+	/// remove neighbor by Vertex
+	public void removeNeighbor(Vertex Vertex) {
 		for(Edge edge: neighbors) {
-			if(edge.getStart().equals(vertext) || edge.getEnd().equals(vertext)) {
+			if(edge.getStart().equals(Vertex) || edge.getEnd().equals(Vertex)) {
 				this.neighbors.remove(edge);
 				break;
 			}
 		}
 	}
 	// check if neighbor vertex has already exist
-	public boolean isNeighborVertex(Vertext vertext) {
+	public boolean isNeighborVertex(Vertex Vertex) {
 		for(Edge edge: neighbors) {
-			if(edge.getStart().equals(vertext) || edge.getEnd().equals(vertext)) {
+			if(edge.getStart().equals(Vertex) || edge.getEnd().equals(Vertex)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	// remove all neighbors of this vertext
+	// remove all neighbors of this Vertex
 	public void removeAllNeighbor() {
 		for(Edge edge: neighbors) {
-			Vertext curVertext = (edge.getEnd().equals(this)) ? edge.getStart():edge.getEnd();
-			curVertext.removeNeighbor(this);
+			Vertex curVertex = (edge.getEnd().equals(this)) ? edge.getStart():edge.getEnd();
+			curVertex.removeNeighbor(this);
 		}
 	}
 	
@@ -197,10 +197,10 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		return neighbors;
 	}
 	
-	// get edge corresponding vertext
-	public Edge getEdge(Vertext vertext) {
+	// get edge corresponding Vertex
+	public Edge getEdge(Vertex Vertex) {
 		for(Edge edge: neighbors) {
-			if(edge.getStart().equals(vertext) || edge.getEnd().equals(vertext)) {
+			if(edge.getStart().equals(Vertex) || edge.getEnd().equals(Vertex)) {
 				return edge;
 			}
 		}
@@ -246,14 +246,14 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	public VBox getVBox() {
 		return vbox;
 	}
-	public Vertext myParent() {
+	public Vertex myParent() {
 		return parent;
 	}
-	public void setmyParent(Vertext parent) {
+	public void setmyParent(Vertex parent) {
 		this.parent = parent;
 	}
 	// round 2 number
-	public double calculateHeuristic(Vertext target){
+	public double calculateHeuristic(Vertex target){
 		return  (double)(Math.round(Math.sqrt(
                 Math.pow( this.getLayoutY() - target.getLayoutY(), 2 ) +
                 Math.pow( this.getLayoutX() - target.getLayoutX(), 2 ))*100)/100.0);

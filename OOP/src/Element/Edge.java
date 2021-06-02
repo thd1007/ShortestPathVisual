@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
 public class Edge extends Line {
 	private int ID;
 	private int weight; // int
-	private Vertext start, end;
+	private Vertex start, end;
 	private TextField text;
 	private Label textLabel;
 	private double textwidth = Configuration.textWeightwidth, textheight = Configuration.textWeighheight;
@@ -38,13 +38,13 @@ public class Edge extends Line {
 		return Math.max(0.0, (this.start.getCenterY() + this.end.getCenterY())/2 - textheight/2);
 	}
 	// constructor Edge with parameters
-	public Edge(Vertext start, Vertext end) {
+	public Edge(Vertex start, Vertex end) {
 		super(start.getCenterX(), start.getCenterY(), end.getCenterX(), end.getCenterY());
 		// set max size for text box
 		ID = Configuration.GraphEdge.size();
-		// assign start vertext
+		// assign start Vertex
 		this.setStart(start);
-		// assign end vertext
+		// assign end Vertex
 		this.setEnd(end);
 		// assign color
 		this.setStroke(Color.BLUE);
@@ -105,7 +105,7 @@ public class Edge extends Line {
 		
 //		text.setTextFormatter(new TextFormatter<>(TextFormatter.IDENTITY_STRING_CONVERTER));
 	}
-	public Edge(List<Vertext> list, int S, int E, int ID, int weight , Paint paint) {
+	public Edge(List<Vertex> list, int S, int E, int ID, int weight , Paint paint) {
 		super(list.get(S).getCenterX(), list.get(S).getCenterY(),
 				list.get(E).getCenterX(), list.get(E).getCenterY());
 		this.start = list.get(S);
@@ -119,7 +119,7 @@ public class Edge extends Line {
 		this.textLabel.setLayoutY(PosTexty());
 		this.textLabel.setFont(Font.font(20));
 	}
-	public Edge CopyEdge(List<Vertext> list, int S, int E) {
+	public Edge CopyEdge(List<Vertex> list, int S, int E) {
 		return new Edge(list, S, E, this.ID, this.weight, this.getStroke());
 	}
 	
@@ -129,16 +129,16 @@ public class Edge extends Line {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public Vertext getStart() {
+	public Vertex getStart() {
 		return start;
 	}
-	public void setStart(Vertext start) {
+	public void setStart(Vertex start) {
 		this.start = start;
 	}
-	public Vertext getEnd() {
+	public Vertex getEnd() {
 		return end;
 	}
-	public void setEnd(Vertext end) {
+	public void setEnd(Vertex end) {
 		this.end = end;
 	}
 	public int getID() {

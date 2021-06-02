@@ -30,8 +30,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 //	private Stage stage;
 //	private Scene scene;
 //	private Parent root;
-	private static Stack<Vertext> Stack1 = new Stack<>();// save path
-	private static Stack<Vertext> Stack2 = new Stack<>();// save dfp
+	private static Stack<Vertex> Stack1 = new Stack<>();// save path
+	private static Stack<Vertex> Stack2 = new Stack<>();// save dfp
 	private int n, m;
 //	
 //	@FXML 
@@ -45,17 +45,17 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 //	private int index = 1;
 //	private Timeline timeline;
 	private void findpath(Block curBlock) {
-		Vertext endVertext = curBlock.endVertext();
-		Vertext startVertext = curBlock.startVertext();
-		if(endVertext == null || endVertext.getG() == Double.MAX_VALUE) {
+		Vertex endVertex = curBlock.endVertex();
+		Vertex startVertex = curBlock.startVertex();
+		if(endVertex == null || endVertex.getG() == Double.MAX_VALUE) {
 			System.out.println("no path");
 			return;
 		}
-		Stack2.push(endVertext);
+		Stack2.push(endVertex);
 		while(!Stack2.isEmpty()) {
-			Vertext curV = Stack2.pop();
+			Vertex curV = Stack2.pop();
 			Stack1.push(curV);
-			if(curV.equals(startVertext)){
+			if(curV.equals(startVertex)){
 				System.out.println("Finished!!!");
 				break;
 			}
@@ -63,7 +63,7 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			for(Edge e: curBlock.listEdge) {
 				// if curV not in edge then skip
 				if(!curV.equals(e.getEnd()) && !curV.equals(e.getStart())) continue;
-				Vertext v1 = (curV.equals(e.getEnd()))? e.getStart(): e.getEnd();
+				Vertex v1 = (curV.equals(e.getEnd()))? e.getStart(): e.getEnd();
 				// check if this node in the path
 				if(v1.getG() + e.getWeight() == curV.getG()) {
 					Stack2.push(v1);
@@ -76,10 +76,10 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			}
 		}
 		int count = 0;
-		Vertext ver1 = null;
+		Vertex ver1 = null;
 		while(!Stack1.isEmpty())
 		{	
-			Vertext ver = Stack1.pop();
+			Vertex ver = Stack1.pop();
 			
 			if(ver.getFill().equals(Color.RED)) {
 				ver.setFill(Color.GREEN);
@@ -98,8 +98,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 	}
 	private void show() {
 		ConfigurationBFA.listBFA.clear();
-		// initialize start vertext g
-		Configuration.startVertext.setG(0);
+		// initialize start Vertex g
+		Configuration.startVertex.setG(0);
 		// create block
 		Block cur = new Block(Configuration.GraphEdge, Configuration.GraphNode);
 		ConfigurationBFA.listBFA.add(cur.CopyBlock());
@@ -107,8 +107,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		for(int i = 1; i <= n-1; i++) {
 			for(Edge e: cur.listEdge) {
 				int weight = e.getWeight();
-				Vertext StartV = e.getStart();
-				Vertext EndV = e.getEnd();
+				Vertex StartV = e.getStart();
+				Vertex EndV = e.getEnd();
 				StartV.setG(Math.min(StartV.getG(), EndV.getG() + weight));
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 				e.setStroke(Color.GREEN);;
@@ -116,17 +116,17 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 				e.setStroke(Color.BLUE);
 			}
 		}
-		System.out.println(cur.endVertext().getG());
+		System.out.println(cur.endVertex().getG());
 		findpath(cur);
 		//Block final_state = new Block(Configuration.GraphEdge, Configuration.GraphNode);
 		//ConfigurationBFA.listBFA.add(final_state);
-		Configuration.startVertext.setG(Double.MAX_VALUE);
+		Configuration.startVertex.setG(Double.MAX_VALUE);
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// run program
-		if(Configuration.startVertext == null || Configuration.endVertext == null) {
+		if(Configuration.startVertex == null || Configuration.endVertex == null) {
 			System.out.println("start end null");
 			return;
 		}
@@ -250,12 +250,12 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 				for(Edge edge: Configuration.GraphEdge) {
 					edge.setStroke(Color.BLUE);
 				}
-				for(Vertext v: Configuration.GraphNode) {
+				for(Vertex v: Configuration.GraphNode) {
 					v.setFill(Color.RED);
 					v.setG(Double.MAX_VALUE);
 				}
-				Configuration.startVertext.setFill(Configuration.startColor);;
-				Configuration.endVertext.setFill(Configuration.endColor);
+				Configuration.startVertex.setFill(Configuration.startColor);;
+				Configuration.endVertex.setFill(Configuration.endColor);
 				
 		String dir = "/application/MainApplication.fxml";
 		root = FXMLLoader.load(getClass().getResource(dir));
@@ -272,8 +272,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		for(Edge edge: block.listEdge) {
 			MainPane.getChildren().addAll(edge, edge.getLabel());
 		}
-		for(Vertext vertext: block.listNode) {
-			MainPane.getChildren().addAll(vertext.getStack(), vertext.getTextg());
+		for(Vertex Vertex: block.listNode) {
+			MainPane.getChildren().addAll(Vertex.getStack(), Vertex.getTextg());
 		}
 	}
 	
