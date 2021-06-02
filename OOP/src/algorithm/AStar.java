@@ -76,7 +76,7 @@ public class AStar {
 			Vertext start = edge.getStart();
 			Vertext end = edge.getEnd();
 			if((start.equals(v) && end.equals(v.myParent())) || (start.equals(v.myParent()) && end.equals(v))){
-				edge.setStroke(Color.PINK);
+				edge.setStroke(Color.DEEPPINK);
 			}
 		}
 		showPath(v.myParent());

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="413.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HelpController">
+<AnchorPane prefHeight="413.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HelpMainController">
    <children>
-      <TextArea fx:id="helpTextArea" prefHeight="502.0" prefWidth="396.0" text="- khi sử dụng tất cả các nút ô trong ô trái trên đều có thể move vertext trừ addedge button&#10;- khi sử dụng reset, hệ thống tự động trở về nút add vertext&#10;- khi trong chế độ tạo edge, khi chọn start vertext có thể bấm lại vào node vừa chọn để hủy thao tác vừa thực hiện&#10;- khi trong chế độ tạo start end, từ trạng thái start có thể tạo end hoặc hủy back lại thao tác chọn start. khi từ trạng thái end&#10;có thể back lại chính thao tác tạo end click lại end V vừa tao &#10;- khi thay đổi weight, sau khi nhập cần enter để kêt thúc thao tác" />
+      <TextArea fx:id="helpTextArea" layoutX="7.0" prefHeight="502.0" prefWidth="396.0" text="Instruction of Application:&#10;(Please read carefully)&#10;1. Create Graph:&#10;- Add Vertex of graph:&#10; + Click on Add vertex button (if this button isn't activated)&#10; + Click on board to add a vertex at the mouse's position&#10;- Add Edge of graph: &#10; + Click on Add edge button (if this button isn't activated)&#10; + First click on a vertex on the board to choose start vertex (click again on this vertex to reset choose)&#10; + Second click on a vertex on the board to choose the end vertex&#10;- Move Vertext of graph:&#10; + Click on Move vertex button (if this button isn't activated)&#10; + Drag vertex with the right mouse to move vertex&#10; + note that vertex can be move when these buttons are activated (Add vertex, move vertex, remove vertex)&#10;- Remove vertex of graph:&#10; + Click on Remove vertex button (if this button isnt activated)&#10; + Click on vertex to remove it&#10;- Remove edge of graph:&#10; + Click on the remove edge button (if this button isn't activated)&#10; + Similar as add edge action&#10;- Reset:&#10; + Click the reset button to remove every object on board&#10;- Choose start and end vertex&#10; + Click on Choose SE button (if this button isn't activated)&#10; + Similar as add edge action&#10;&#10;2. Running algorithm&#10;- Choose your wanted algorithm&#10;- Click play to play algorithm&#10;- Click pause to pause the program&#10;- Click previous to get back the previous state of the graph&#10;- Click next to get the next state of the graph&#10;- Click First to get back the initial state of the graph&#10;- Click Last to get to the last state of the graph" />
    </children>
 </AnchorPane>

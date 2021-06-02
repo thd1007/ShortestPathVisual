@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,12 +7,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="myAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="875.0" style="-fx-background-color: #02075d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainApplicationController">
+<AnchorPane fx:id="myAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="774.0" prefWidth="875.0" style="-fx-background-color: #02075d;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainApplicationController">
 	<children>
 		<AnchorPane fx:id="MainPane" layoutX="269.0" layoutY="62.0" prefHeight="709.0" prefWidth="558.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="62.0" />
 		<VBox fx:id="myVbox" layoutX="14.0" layoutY="54.0" prefHeight="448.0" prefWidth="215.0">
 			<children>
-				<Button fx:id="AddVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" text="Add Vertext">
+				<Button fx:id="AddVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Add Vertext" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="25.0" />
 					</VBox.margin>
@@ -25,7 +20,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="AddEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" text="Add Edge">
+				<Button fx:id="AddEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Add Edge" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>
@@ -33,7 +28,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="MoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" text="Move Vertext">
+				<Button fx:id="MoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Move Vertext" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>
@@ -41,7 +36,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="RemoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" text="Remove Vertext">
+				<Button fx:id="RemoveVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Remove Vertext" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>
@@ -49,7 +44,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="RemoveEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" text="Remove Edge">
+				<Button fx:id="RemoveEdgerb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Remove Edge" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>
@@ -57,7 +52,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="ResetButton" mnemonicParsing="false" onAction="#ResetFunction" prefHeight="31.0" prefWidth="125.0" text="Reset">
+				<Button fx:id="ResetButton" mnemonicParsing="false" onAction="#ResetFunction" prefHeight="31.0" prefWidth="135.0" text="Reset">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>
@@ -65,7 +60,7 @@
 						<Font name="System Bold" size="15.0" />
 					</font>
 				</Button>
-				<Button fx:id="ChooseStartEndVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="125.0" text="Choose S/E">
+				<Button fx:id="ChooseStartEndVertextrb" mnemonicParsing="false" onAction="#ActionEventFunc" prefHeight="31.0" prefWidth="135.0" text="Choose S/E" textAlignment="CENTER">
 					<VBox.margin>
 						<Insets left="40.0" top="30.0" />
 					</VBox.margin>

@@ -26,7 +26,7 @@ import javafx.scene.text.Text;
 
 public class Edge extends Line {
 	private int ID;
-	private int weight;
+	private int weight; // int
 	private Vertext start, end;
 	private TextField text;
 	private Label textLabel;
@@ -51,6 +51,7 @@ public class Edge extends Line {
 		this.setStrokeWidth(Configuration.Linewidth);
 		// assign weight of edge with random number from min to max
 		this.weight = new Random().nextInt(Configuration.maxWeight - Configuration.minWeight) + Configuration.minWeight;
+		//(double)Math.round(Math.sqrt(Math.pow(start.getCenterX() - end.getCenterX(), 2) + Math.pow(start.getCenterY() - end.getCenterY(), 2))*100)/100;  
 		
 		text = new TextField(String.valueOf(this.weight));
 //		text.setMaxSize(textwidth, textheight);
@@ -104,7 +105,7 @@ public class Edge extends Line {
 		
 //		text.setTextFormatter(new TextFormatter<>(TextFormatter.IDENTITY_STRING_CONVERTER));
 	}
-	public Edge(List<Vertext> list, int S, int E, int ID, int weight, Paint paint) {
+	public Edge(List<Vertext> list, int S, int E, int ID, int weight , Paint paint) {
 		super(list.get(S).getCenterX(), list.get(S).getCenterY(),
 				list.get(E).getCenterX(), list.get(E).getCenterY());
 		this.start = list.get(S);

@@ -3,7 +3,7 @@ import  Element.*;
 import java.util.Stack;
 public class BellmanFordAlgorithm {
 	private static Stack<Vertext> Stack1 = new Stack<>();// save path
-	private static Stack<Vertext> Stack2 = new Stack<>();// save dfp
+	private static Stack<Vertext> Stack2 = new Stack<>();// save dip
 	public static void findpath() {
 		if(Configuration.endVertext == null || Configuration.endVertext.getG() == Double.MAX_VALUE) {
 			System.out.println("no path");
@@ -26,7 +26,7 @@ public class BellmanFordAlgorithm {
 					flag = true;
 				}
 			}
-			// if cant go far more from this node, pop it out
+			// if can't go far more from this node, pop it out
 			if(!flag) {
 				Stack1.pop();
 			}
@@ -57,9 +57,9 @@ public class BellmanFordAlgorithm {
 		}
 		for(int i = 1; i <= n-1; i++) {
 			for(Edge e: Configuration.GraphEdge) {
+				int weight = e.getWeight();
 				Vertext StartV = e.getStart();
 				Vertext EndV = e.getEnd();
-				int weight = e.getWeight();
 				StartV.setG(Math.min(StartV.getG(), EndV.getG() + weight));
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 			}
@@ -68,7 +68,7 @@ public class BellmanFordAlgorithm {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// set distance from start vertext to all vertext
+		// set distance from start vertex to all vertex
 		
 	}
 

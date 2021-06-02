@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -171,6 +172,10 @@ public class MainApplicationController implements Initializable {
 				Parent root1;
 				root1 = loader.load();
 				Stage stage1 = new Stage();
+				stage1.setTitle("Help");
+				Image icon = new Image("/application/dauhoi.jpg");
+				stage1.getIcons().add(icon);
+				stage1.setResizable(false);
 				stage1.setScene(new Scene(root1));
 				stage1.show();
 			} catch (IOException e1) {
@@ -312,6 +317,13 @@ public class MainApplicationController implements Initializable {
 	
 	// Choose Start and End function
 	public void ChooseStartEndVertext() {
+		if(!CheckAnyVertex()) return;
+		if(Configuration.startVertext != null || Configuration.endVertext != null) {
+			Configuration.startVertext.setFill(Color.RED);
+			Configuration.endVertext.setFill(Color.RED);
+			Configuration.startVertext = null;
+			Configuration.endVertext = null;
+		}
 		Configuration.allowMoveVertext = false;
 		myLabel.setText("Please choose Start Vertext");
 		MainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, ChooseStartEndVertextHandler);

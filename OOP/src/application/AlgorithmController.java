@@ -31,6 +31,9 @@ public abstract class AlgorithmController {
 		protected VBox vbox;
 		protected AnchorPane myAnchor;
 		
+		@FXML
+		protected Button helpme;
+		
 		// For showing to Screen
 		protected int index = 1;
 		protected Timeline timeline;

@@ -6,15 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 
-public class HelpController implements Initializable {
+public abstract class HelpController implements Initializable {
 	@FXML
-	TextArea helpTextArea;
+	protected TextArea helpTextArea;
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		helpTextArea.setScaleShape(true);
+		//helpTextArea.setScaleShape(true);
 		helpTextArea.setEditable(false);
 	}
 

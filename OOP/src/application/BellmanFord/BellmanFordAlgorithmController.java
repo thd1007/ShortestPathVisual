@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -105,9 +106,9 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 
 		for(int i = 1; i <= n-1; i++) {
 			for(Edge e: cur.listEdge) {
+				int weight = e.getWeight();
 				Vertext StartV = e.getStart();
 				Vertext EndV = e.getEnd();
-				int weight = e.getWeight();
 				StartV.setG(Math.min(StartV.getG(), EndV.getG() + weight));
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 				e.setStroke(Color.GREEN);;
@@ -133,6 +134,25 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		m = Configuration.GraphEdge.size();
 		show();
 		showMainPane(0);
+		
+		helpme.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/BellmanFord/HelpBell.fxml"));
+			try {
+				Parent root1;
+				root1 = loader.load();
+				Stage stage1 = new Stage();
+				stage1.setTitle("Help");
+				Image icon = new Image("/application/dauhoi.jpg");
+				stage1.getIcons().add(icon);
+				stage1.setResizable(false);
+				stage1.setScene(new Scene(root1));
+				stage1.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
