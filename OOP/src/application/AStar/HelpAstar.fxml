@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="413.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea editable="false" layoutX="4.0" prefHeight="502.0" prefWidth="396.0" text="Hello here is code for Astar which we use: &#10;&#10;PriorityQueue&lt;Vertext&gt; closedList = new PriorityQueue&lt;&gt;();&#10;PriorityQueue&lt;Vertext&gt; openList = new PriorityQueue&lt;&gt;();&#10;&#10;void initState() {&#10;&#9;openList.clear();&#10;&#9;closedList.clear();&#10;&#9;for(Vertext v:  GraphNode) {&#10;&#9;&#9;v.setmyParent(null);&#10;&#9;&#9;if(v.equals(startVertext)) {&#10;&#9;&#9;&#9;v.setG(0);&#10;&#9;&#9;&#9;v.setF(0);&#10;&#9;&#9;&#9;v.setH(v.calculateHeuristic(endVertext));&#10;&#9;&#9;}&#10;&#9;&#9;else {&#10;&#9;&#9;&#9;v.setG(Double.MAX_VALUE);&#10;&#9;&#9;&#9;v.setF(0);&#10;&#9;&#9;&#9;v.setH(v.calculateHeuristic(endVertext));&#10;&#9;&#9;&#9;}&#10;&#9;&#9;}&#10;&#9;&#9;openList.add(startVertext);&#10;}&#10;&#10;void showPath(Vertext v) {&#10;&#9;&#9;if(v.myParent() == null) return;&#10;&#9;&#9;for(Edge edge: .GraphEdge) {&#10;&#9;&#9;&#9;Vertext start = edge.getStart();&#10;&#9;&#9;&#9;Vertext end = edge.getEnd();&#10;&#9;&#9;&#9;if((start.equals(v) &amp;&amp; end.equals(v.myParent())) || (start.equals(v.myParent()) &amp;&amp; end.equals(v))){&#10;&#9;&#9;&#9;&#9;edge.setStroke(Color.DEEPPINK);&#10;&#9;&#9;&#9;}&#10;&#9;&#9;}&#10;&#9;&#9;showPath(v.myParent());&#10;&#9;}&#10;&#10;public static void run() {&#10;&#9;&#9;if(startVertext == null || endVertext == null) &#10;&#9;&#9;&#9;return;&#10;&#9;&#9;&#10;&#9;&#9;initState();&#10;&#9;&#9;&#10;&#9;&#9;while(!openList.isEmpty()) {&#10;&#9;&#9;&#9;Vertext u = openList.peek();&#10;&#9;&#9;&#9;&#10;&#9;&#9;&#9;step(u);&#10;&#9;&#9;}&#10;&#9;&#9;showPath(Configuration.endVertext);&#10;&#9;&#9;System.out.println(Configuration.endVertext.getF());&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#10;" />
+   </children>
+</AnchorPane>

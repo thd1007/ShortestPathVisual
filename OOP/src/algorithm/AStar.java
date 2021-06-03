@@ -67,6 +67,9 @@ public class AStar {
 		openList.remove(curVertex);
 		closedList.add(curVertex);
 		Block step = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		for(Edge edge: curVertex.getNeighbors()) {
+			edge.setStroke(Configuration.color_edge);
+		}
 		eachStep.add(step);
 		curVertex.setFill(cur);
 	}
@@ -76,7 +79,7 @@ public class AStar {
 			Vertext start = edge.getStart();
 			Vertext end = edge.getEnd();
 			if((start.equals(v) && end.equals(v.myParent())) || (start.equals(v.myParent()) && end.equals(v))){
-				edge.setStroke(Color.PINK);
+				edge.setStroke(Color.DEEPPINK);
 			}
 		}
 		showPath(v.myParent());

@@ -101,7 +101,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 		this.g = g;
 		this.f = f;
 		this.text = new Text(text);
-		this.text.setStroke(Configuration.text_color);
+		this.text.setStroke(Configuration.text_color);	
 		this.text.setFont(Configuration.text_font);
 		this.textg = new Label(textg);
 		this.textga = new Label(textg);
@@ -234,7 +234,7 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	}
 	public void setH(double h) {
 		if(h == 0) textha.setText("Heuristic: 0.0");
-		else textha.setText("Heuristic: " + String.valueOf(h));
+		else textha.setText("Heuristic: " + String.valueOf((double)Math.round(h*100)/100.0));
 		this.h = h;
 	}
 	public Text getText() {

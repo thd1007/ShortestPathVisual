@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -105,14 +106,14 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 
 		for(int i = 1; i <= n-1; i++) {
 			for(Edge e: cur.listEdge) {
+				int weight = e.getWeight();
 				Vertext StartV = e.getStart();
 				Vertext EndV = e.getEnd();
-				int weight = e.getWeight();
 				StartV.setG(Math.min(StartV.getG(), EndV.getG() + weight));
 				EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));
 				e.setStroke(Color.GREEN);;
 				ConfigurationBFA.listBFA.add(cur.CopyBlock());
-				e.setStroke(Color.BLUE);
+				e.setStroke(Configuration.color_edge); //Color.BLUE
 			}
 		}
 		System.out.println(cur.endVertext().getG());
@@ -133,6 +134,25 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		m = Configuration.GraphEdge.size();
 		show();
 		showMainPane(0);
+		
+		helpme.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/BellmanFord/HelpBell.fxml"));
+			try {
+				Parent root1;
+				root1 = loader.load();
+				Stage stage1 = new Stage();
+				stage1.setTitle("Help");
+				Image icon = new Image("/application/dauhoi.jpg");
+				stage1.getIcons().add(icon);
+				stage1.setResizable(false);
+				stage1.setScene(new Scene(root1));
+				stage1.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
@@ -145,7 +165,7 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			showMainPane(index++);
 		});
 		timeline.getKeyFrames().add(keyframe);
-		startButton.setOnAction(e -> {
+		startButton.setOnAction(event -> {
 			startButton.setTextFill(Color.RED);
 			pauseButton.setTextFill(Color.BLACK);
 			preButton.setTextFill(Color.BLACK);
@@ -155,8 +175,9 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			LastStateButton.setTextFill(Color.BLACK);
 			myLabel.setText("Algorithm running !!!");
 			timeline.play();
+
 		});
-		pauseButton.setOnAction(e -> {
+		pauseButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.RED);
 			preButton.setTextFill(Color.BLACK);
@@ -167,7 +188,7 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			myLabel.setText("Algorithm paused");
 			timeline.pause();
 		});
-		preButton.setOnAction(e -> {
+		preButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
 			preButton.setTextFill(Color.RED);
@@ -175,15 +196,16 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			nextButton.setTextFill(Color.BLACK);
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
+			myLabel.setText("Previous Step");
 			if(index == 0) {
 				myLabel.setText("There is no previous step");
 				return;
 			}
-			timeline.stop();
 			showMainPane(--index);
+			timeline.stop();
 		});
-		nextButton.setOnAction(e -> {
-			startButton.setTextFill(Color.RED);
+		nextButton.setOnAction(event -> {
+			startButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
 			preButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
@@ -195,10 +217,10 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 				myLabel.setText("There is no more step");
 				return;
 			}
-			timeline.stop();
 			showMainPane(index++);
+			timeline.stop();
 		});
-		FirstStateButton.setOnAction(e -> {
+		FirstStateButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
 			preButton.setTextFill(Color.BLACK);
@@ -228,7 +250,7 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 	public void BackMain(ActionEvent e) throws IOException {
 		// Draw again in Main
 				for(Edge edge: Configuration.GraphEdge) {
-					edge.setStroke(Color.BLUE);
+					edge.setStroke(Configuration.color_edge); // Color.BLUE
 				}
 				for(Vertext v: Configuration.GraphNode) {
 					v.setFill(Color.RED);

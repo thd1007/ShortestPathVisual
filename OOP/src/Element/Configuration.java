@@ -12,10 +12,14 @@ public class Configuration {
 	
 	// text color in vertex
 	public static Color text_color = Color.WHITE;
-	// font color of text in vertex
+	// font  of text in vertex
 	public static Font text_font = Font.font(15);
+	// font color of text in weight edge
+	public static Font text_edge_font = Font.font("Aharoni", 18);
+	// color edge normal
+	public static Color color_edge = Color.web("#4d4dff");
 	// Edge line with
-	public static double Linewidth = 3;
+	public static double Linewidth = 2.5;
 	// color vertext
 	public static Paint VertextColor = Color.RED;
 	// chose color vertext

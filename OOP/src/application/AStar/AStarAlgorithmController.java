@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -55,6 +56,24 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 		AStar.run();
 		showMainPane(0);
 		
+		helpme.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AStar/HelpAstar.fxml"));
+			try {
+				Parent root1;
+				root1 = loader.load();
+				Stage stage1 = new Stage();
+				stage1.setTitle("Help");
+				Image icon = new Image("/application/dauhoi.jpg");
+				stage1.getIcons().add(icon);
+				stage1.setResizable(false);
+				stage1.setScene(new Scene(root1));
+				stage1.show();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
@@ -79,8 +98,8 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			timeline.play();
 		});
 		pauseButton.setOnAction(event -> {
+			pauseButton.setTextFill(Color.PINK);
 			startButton.setTextFill(Color.BLACK);
-			pauseButton.setTextFill(Color.RED);
 			preButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
 			nextButton.setTextFill(Color.BLACK);
@@ -97,6 +116,7 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			nextButton.setTextFill(Color.BLACK);
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
+			myLabel.setText("Previous Step");
 			if(index == 0) {
 				myLabel.setText("There is no previous step");
 				return;
@@ -105,7 +125,7 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			showMainPane(--index);
 		});
 		nextButton.setOnAction(event -> {
-			startButton.setTextFill(Color.RED);
+			startButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
 			preButton.setTextFill(Color.BLACK);
 			pauseButton.setTextFill(Color.BLACK);
@@ -150,7 +170,7 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 	public void BackMain(ActionEvent e) throws IOException {
 		// Draw again in Main
 		for(Edge edge: Configuration.GraphEdge) {
-			edge.setStroke(Color.BLUE);
+			edge.setStroke(Configuration.color_edge);
 		}
 		for(Vertext v: Configuration.GraphNode) {
 			v.setFill(Color.RED);

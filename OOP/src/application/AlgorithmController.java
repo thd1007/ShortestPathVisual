@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,6 +31,11 @@ public abstract class AlgorithmController {
 		protected AnchorPane anchorP;
 		protected VBox vbox;
 		protected AnchorPane myAnchor;
+		
+		@FXML
+		protected Button helpme;
+		@FXML
+		//protected ProgressBar progressbar;
 		
 		// For showing to Screen
 		protected int index = 1;

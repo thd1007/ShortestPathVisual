@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="413.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea fx:id="helpTextArea" editable="false" layoutX="3.0" prefHeight="502.0" prefWidth="396.0" text="hello this is code BellmanFord we use: &#10;&#10;void show() {&#10;&#9;if(.startVertext == null || endVertext == null) {&#10;&#9;&#9;System.out.println(&quot;start end null&quot;);&#10;&#9;&#9;return;&#10;&#9;}&#10;&#9;int n = GraphNode.size();&#10;&#9;for(Vertext vertext: GraphNode) {&#10;&#9;&#9;if(vertext.equals(Configuration.startVertext)) {&#10;&#9;&#9;&#9;vertext.setG(0);&#10;&#9;&#9;}&#10;&#9;&#9;else {&#10;&#9;&#9;&#9;vertext.setG(Double.MAX_VALUE);&#10;&#9;&#9;}&#10;&#9;}&#10;&#9;for(int i = 1; i &lt;= n-1; i++) {&#10;&#9;&#9;for(Edge e: GraphEdge) {&#10;&#9;&#9;&#9;int weight = e.getWeight();&#10;&#9;&#9;&#9;Vertext StartV = e.getStart();&#10;&#9;&#9;&#9;Vertext EndV = e.getEnd();&#10;&#9;&#9;&#9;StartV.setG(Math.min(StartV.getG(), EndV.getG() + weight));&#10;&#9;&#9;&#9;EndV.setG(Math.min(EndV.getG(), StartV.getG() + weight));&#10;&#9;&#9;}&#10;&#9;}&#10;&#9;&#9;System.out.println(endVertext.getG());&#10;}" />
+   </children>
+</AnchorPane>

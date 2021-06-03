@@ -3,6 +3,8 @@ import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import javax.swing.JOptionPane;
+
 import Element.Block;
 import Element.Configuration;
 import Element.Edge;
@@ -48,6 +50,9 @@ public class Dijkstra {
 			}
 		}
 		Block step = new Block(Configuration.GraphEdge, Configuration.GraphNode);
+		for(Edge edge: curVertex.getNeighbors()) {
+			edge.setStroke(Configuration.color_edge);
+		}
 		eachStep.add(step);
 		curVertex.setFill(cur);
 	}
@@ -57,7 +62,7 @@ public class Dijkstra {
 			Vertext start = edge.getStart();
 			Vertext end = edge.getEnd();
 			if((start.equals(v) && end.equals(v.myParent())) || (start.equals(v.myParent()) && end.equals(v))){
-				edge.setStroke(Color.PINK);
+				edge.setStroke(Color.DEEPPINK);
 			}
 		}
 		showPath(v.myParent());
