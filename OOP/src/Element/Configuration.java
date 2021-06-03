@@ -15,7 +15,7 @@ public class Configuration {
 	// font  of text in vertex
 	public static Font text_font = Font.font(15);
 	// font color of text in weight edge
-	public static Font text_edge_font = Font.font("Aharoni", 18);
+	public static Font text_edge_font = Font.font("Aharoni", 15);
 	// color edge normal
 	public static Color color_edge = Color.web("#4d4dff");
 	// Edge line with

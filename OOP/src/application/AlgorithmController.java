@@ -35,7 +35,9 @@ public abstract class AlgorithmController {
 		@FXML
 		protected Button helpme;
 		@FXML
-		//protected ProgressBar progressbar;
+		protected ProgressBar progressbar;
+		@FXML
+		protected Label step_number;
 		
 		// For showing to Screen
 		protected int index = 1;

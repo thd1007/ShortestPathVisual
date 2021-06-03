@@ -9,6 +9,7 @@ import Element.Configuration;
 import Element.Edge;
 import Element.Vertext;
 import algorithm.AStar;
+import algorithm.Dijkstra;
 import application.AlgorithmController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,13 +50,16 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// run program
+		// set color of progress bar
+		progressbar.setStyle("-fx-accent: #00ff00;");
 		if(Configuration.startVertext == null || Configuration.endVertext == null) {
 			System.out.println("start end null");
 			return;
 		}
 		AStar.run();
+		index = 0;
 		showMainPane(0);
-		
+		step_number.setText("0 / " + String.valueOf(AStar.eachStep.size()-1));
 		helpme.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AStar/HelpAstar.fxml"));
 			try {
@@ -78,12 +82,14 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
 		KeyFrame keyframe = new KeyFrame(duration, event -> {
-			if(index == AStar.eachStep.size()) {
+			if(index == AStar.eachStep.size() - 1) {
 				myLabel.setText("Algorithm Finished !!!");
 				timeline.stop();
 				return;
 			}
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(AStar.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, AStar.eachStep.size()-1));
+			showMainPane(++index);
 		});
 		timeline.getKeyFrames().add(keyframe);
 		startButton.setOnAction(event -> {
@@ -106,7 +112,7 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
 			myLabel.setText("Algorithm paused");
-			timeline.pause();
+			timeline.stop();
 		});
 		preButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
@@ -122,6 +128,8 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 				return;
 			}
 			timeline.stop();
+			progressbar.setProgress((double)(index-1)/(AStar.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index-1, AStar.eachStep.size()-1));
 			showMainPane(--index);
 		});
 		nextButton.setOnAction(event -> {
@@ -133,12 +141,14 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
 			myLabel.setText("Next Step");
-			if(index == AStar.eachStep.size()) {
+			if(index == AStar.eachStep.size() - 1) {
 				myLabel.setText("There is no more step");
 				return;
 			}
 			timeline.stop();
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(AStar.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, AStar.eachStep.size()-1));
+			showMainPane(++index);
 		});
 		FirstStateButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
@@ -150,7 +160,9 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			LastStateButton.setTextFill(Color.BLACK);
 			timeline.stop();
 			showMainPane(0);
-			index = 1;
+			progressbar.setProgress(0);
+			step_number.setText(String.format("%d / %d", 0, AStar.eachStep.size()-1));
+			index = 0;
 		});
 		LastStateButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
@@ -162,6 +174,8 @@ public class AStarAlgorithmController extends AlgorithmController implements Ini
 			LastStateButton.setTextFill(Color.RED);
 			timeline.stop();
 			index = AStar.eachStep.size()-1;
+			progressbar.setProgress(1.0);
+			step_number.setText(String.format("%d / %d", index, AStar.eachStep.size()-1));
 			showMainPane(index);
 		});
 	}

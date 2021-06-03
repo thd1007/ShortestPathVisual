@@ -13,16 +13,12 @@ import application.AlgorithmController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -49,12 +45,16 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// run program
+		// set color of progress bar
+		progressbar.setStyle("-fx-accent: #00ff00;");
 		if(Configuration.startVertext == null || Configuration.endVertext == null) {
 			System.out.println("start end null");
 			return;
 		}
 		Dijkstra.run();
 		showMainPane(0);
+		index = 0;
+		step_number.setText("0 / " + String.valueOf(Dijkstra.eachStep.size()-1));
 		
 		helpme.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Dijkstra/HelpDijkstra.fxml"));
@@ -69,7 +69,6 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 				stage1.setScene(new Scene(root1));
 				stage1.show();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -77,12 +76,14 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
 		KeyFrame keyframe = new KeyFrame(duration, event -> {
-			if(index == Dijkstra.eachStep.size()) {
+			if(index == Dijkstra.eachStep.size()-1) {
 				myLabel.setText("Algorithm Finished !!!");
 				timeline.stop();
 				return;
 			}
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(Dijkstra.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, Dijkstra.eachStep.size()-1));
+			showMainPane(++index);
 		});
 		timeline.getKeyFrames().add(keyframe);
 		startButton.setOnAction(event -> {
@@ -121,6 +122,8 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 				return;
 			}
 			timeline.stop();
+			progressbar.setProgress((double)(index-1)/(Dijkstra.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index-1, Dijkstra.eachStep.size()-1));
 			showMainPane(--index);
 		});
 		nextButton.setOnAction(event -> {
@@ -132,12 +135,14 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
 			myLabel.setText("Next Step");
-			if(index == Dijkstra.eachStep.size()) {
+			if(index == Dijkstra.eachStep.size()-1) {
 				myLabel.setText("There is no more step");
 				return;
 			}
 			timeline.stop();
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(Dijkstra.eachStep.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, Dijkstra.eachStep.size()-1));
+			showMainPane(++index);
 		});
 		FirstStateButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
@@ -148,8 +153,10 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 			FirstStateButton.setTextFill(Color.RED);
 			LastStateButton.setTextFill(Color.BLACK);
 			timeline.stop();
+			progressbar.setProgress(0);
+			step_number.setText(String.format("%d / %d", 0, Dijkstra.eachStep.size()-1));
 			showMainPane(0);
-			index = 1;
+			index = 0;
 		});
 		LastStateButton.setOnAction(event -> {
 			startButton.setTextFill(Color.BLACK);
@@ -161,6 +168,8 @@ public class DijkstraAlgorithmController extends AlgorithmController implements 
 			LastStateButton.setTextFill(Color.RED);
 			timeline.stop();
 			index = Dijkstra.eachStep.size()-1;
+			step_number.setText(String.format("%d / %d", index, Dijkstra.eachStep.size()-1));
+			progressbar.setProgress(1.0);
 			showMainPane(index);
 		});
 	}

@@ -211,8 +211,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	}
 	public void setF(double f) {
 		if(f == 0) textfa.setText("Cost: 0.0");
-		else textfa.setText("Cost: " + String.valueOf(f));
-		this.f = f;
+		else textfa.setText("Cost: " + String.format("%.1f",f));
+		this.f = Double.valueOf(String.format("%.1f",f));
 	}
 	public double getG() {
 		return g;
@@ -223,10 +223,10 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 			textga.setText("Dist: INF");
 		}
 		else {
-			textg.setText("Dist: "+ String.valueOf(g));
-			textga.setText("Dist: " + String.valueOf(g));
+			textg.setText("Dist: "+ String.format("%.1f",g));
+			textga.setText("Dist: " + String.format("%.1f",g));
 		}
-		this.g = g;
+		this.g = Double.valueOf(String.format("%.1f",g));
 		
 	}
 	public double getH() {
@@ -234,8 +234,8 @@ public class Vertext extends Circle implements Comparable<Vertext> {
 	}
 	public void setH(double h) {
 		if(h == 0) textha.setText("Heuristic: 0.0");
-		else textha.setText("Heuristic: " + String.valueOf((double)Math.round(h*100)/100.0));
-		this.h = h;
+		else textha.setText("Heuristic: " + String.format("%.1f",h));
+		this.h = Double.valueOf(String.format("%.1f",h));
 	}
 	public Text getText() {
 		return text;

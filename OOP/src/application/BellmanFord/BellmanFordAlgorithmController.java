@@ -126,6 +126,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// run program
+		// set color of progress bar
+		progressbar.setStyle("-fx-accent: #00ff00;");
 		if(Configuration.startVertext == null || Configuration.endVertext == null) {
 			System.out.println("start end null");
 			return;
@@ -134,7 +136,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		m = Configuration.GraphEdge.size();
 		show();
 		showMainPane(0);
-		
+		step_number.setText("0 / " + String.valueOf(ConfigurationBFA.listBFA.size()-1));
+		index = 0;
 		helpme.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/BellmanFord/HelpBell.fxml"));
 			try {
@@ -157,12 +160,14 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		Duration duration = Duration.millis(3000);
 		KeyFrame keyframe = new KeyFrame(duration, e -> {
-			if(index == ConfigurationBFA.listBFA.size()) {
+			if(index == ConfigurationBFA.listBFA.size()-1) {
 				myLabel.setText("Algorithm Finished !!!");
 				timeline.stop();
 				return;
 			}
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(ConfigurationBFA.listBFA.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, ConfigurationBFA.listBFA.size()-1));
+			showMainPane(++index);
 		});
 		timeline.getKeyFrames().add(keyframe);
 		startButton.setOnAction(event -> {
@@ -201,6 +206,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 				myLabel.setText("There is no previous step");
 				return;
 			}
+			progressbar.setProgress((double)(index-1)/(ConfigurationBFA.listBFA.size()-1));
+			step_number.setText(String.format("%d / %d", index-1, ConfigurationBFA.listBFA.size()-1));
 			showMainPane(--index);
 			timeline.stop();
 		});
@@ -213,11 +220,13 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			FirstStateButton.setTextFill(Color.BLACK);
 			LastStateButton.setTextFill(Color.BLACK);
 			myLabel.setText("Next Step");
-			if(index == ConfigurationBFA.listBFA.size()) {
+			if(index == ConfigurationBFA.listBFA.size()-1) {
 				myLabel.setText("There is no more step");
 				return;
 			}
-			showMainPane(index++);
+			progressbar.setProgress((double)(index+1)/(ConfigurationBFA.listBFA.size()-1));
+			step_number.setText(String.format("%d / %d", index+1, ConfigurationBFA.listBFA.size()-1));
+			showMainPane(++index);
 			timeline.stop();
 		});
 		FirstStateButton.setOnAction(event -> {
@@ -229,8 +238,10 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			FirstStateButton.setTextFill(Color.RED);
 			LastStateButton.setTextFill(Color.BLACK);
 			timeline.stop();
+			progressbar.setProgress(0);
+			step_number.setText(String.format("%d / %d", 0, ConfigurationBFA.listBFA.size()-1));
 			showMainPane(0);
-			index = 1;
+			index = 0;
 		});
 		LastStateButton.setOnAction(e -> {
 			startButton.setTextFill(Color.BLACK);
@@ -242,6 +253,8 @@ public class BellmanFordAlgorithmController extends AlgorithmController implemen
 			LastStateButton.setTextFill(Color.RED);
 			timeline.stop();
 			index = ConfigurationBFA.listBFA.size()-1;
+			step_number.setText(String.format("%d / %d", index, ConfigurationBFA.listBFA.size()-1));
+			progressbar.setProgress(1.0);
 			showMainPane(index);
 		});
 	}
